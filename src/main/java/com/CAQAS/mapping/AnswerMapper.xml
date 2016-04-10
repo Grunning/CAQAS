@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.CAQAS.dao.AnswerMapper" >
+  <resultMap id="BaseResultMap" type="com.CAQAS.pojo.Answer" >
+    <id column="a_id" property="aId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="key_words" property="keyWords" jdbcType="VARCHAR" />
+    <result column="a_category_id" property="aCategoryId" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.CAQAS.pojo.Answer" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    a_id, title, key_words, a_category_id, time
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from answer
+    where a_id = #{aId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from answer
+    where a_id = #{aId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.CAQAS.pojo.Answer" >
+    insert into answer (a_id, title, key_words, 
+      a_category_id, time, content
+      )
+    values (#{aId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{keyWords,jdbcType=VARCHAR}, 
+      #{aCategoryId,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.CAQAS.pojo.Answer" >
+    insert into answer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="aId != null" >
+        a_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="keyWords != null" >
+        key_words,
+      </if>
+      <if test="aCategoryId != null" >
+        a_category_id,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="aId != null" >
+        #{aId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWords != null" >
+        #{keyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="aCategoryId != null" >
+        #{aCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.CAQAS.pojo.Answer" >
+    update answer
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWords != null" >
+        key_words = #{keyWords,jdbcType=VARCHAR},
+      </if>
+      <if test="aCategoryId != null" >
+        a_category_id = #{aCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.CAQAS.pojo.Answer" >
+    update answer
+    set title = #{title,jdbcType=VARCHAR},
+      key_words = #{keyWords,jdbcType=VARCHAR},
+      a_category_id = #{aCategoryId,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.CAQAS.pojo.Answer" >
+    update answer
+    set title = #{title,jdbcType=VARCHAR},
+      key_words = #{keyWords,jdbcType=VARCHAR},
+      a_category_id = #{aCategoryId,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP}
+    where a_id = #{aId,jdbcType=INTEGER}
+  </update>
+</mapper>
