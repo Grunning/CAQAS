@@ -3,36 +3,32 @@ package com.CAQAS.pojo;
 import java.util.Date;
 
 public class Question {
-    private Integer qId;
+    private Integer quesId;
 
-    private String title;
+    private String quesTitle;
 
     private Integer searchNum;
 
-    private Integer qAId;
+    private Integer quesAnswId;
 
-    private Date time;
+    private Date quesTime;
 
-    private Date answerTime;
+    private Date quesAnswerTime;
 
-    private Integer qDepId;
-
-    private Integer qCategoryId;
-
-    public Integer getqId() {
-        return qId;
+    public Integer getQuesId() {
+        return quesId;
     }
 
-    public void setqId(Integer qId) {
-        this.qId = qId;
+    public void setQuesId(Integer quesId) {
+        this.quesId = quesId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getQuesTitle() {
+        return quesTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+    public void setQuesTitle(String quesTitle) {
+        this.quesTitle = quesTitle == null ? null : quesTitle.trim();
     }
 
     public Integer getSearchNum() {
@@ -43,43 +39,27 @@ public class Question {
         this.searchNum = searchNum;
     }
 
-    public Integer getqAId() {
-        return qAId;
+    public Integer getQuesAnswId() {
+        return quesAnswId;
     }
 
-    public void setqAId(Integer qAId) {
-        this.qAId = qAId;
+    public void setQuesAnswId(Integer quesAnswId) {
+        this.quesAnswId = quesAnswId;
     }
 
-    public Date getTime() {
-        return time;
+    public Date getQuesTime() {
+        return quesTime;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setQuesTime(Date quesTime) {
+        this.quesTime = quesTime;
     }
 
-    public Date getAnswerTime() {
-        return answerTime;
+    public Date getQuesAnswerTime() {
+        return quesAnswerTime;
     }
 
-    public void setAnswerTime(Date answerTime) {
-        this.answerTime = answerTime;
-    }
-
-    public Integer getqDepId() {
-        return qDepId;
-    }
-
-    public void setqDepId(Integer qDepId) {
-        this.qDepId = qDepId;
-    }
-
-    public Integer getqCategoryId() {
-        return qCategoryId;
-    }
-
-    public void setqCategoryId(Integer qCategoryId) {
-        this.qCategoryId = qCategoryId;
+    public void setQuesAnswerTime(Date quesAnswerTime) {
+        this.quesAnswerTime = quesAnswerTime;
     }
 }

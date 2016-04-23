@@ -1,10 +1,7 @@
 package com.CAQAS.dao;
 
-import org.springframework.stereotype.Repository;
-
 import com.CAQAS.pojo.User;
 
-@Repository
 public interface UserMapper {
     int deleteByPrimaryKey(Integer userId);
 
@@ -13,6 +10,8 @@ public interface UserMapper {
     int insertSelective(User record);
 
     User selectByPrimaryKey(Integer userId);
+    
+    User selectByUserName(String userName);
 
     int updateByPrimaryKeySelective(User record);
 

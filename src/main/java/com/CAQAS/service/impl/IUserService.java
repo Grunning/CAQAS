@@ -18,4 +18,8 @@ public class IUserService implements UserService {
 		return this.userMapper.selectByPrimaryKey(userId);
 	}
 
+	public User selectByUserName(String userName) {
+		return this.userMapper.selectByUserName(userName);
+	}
+
 }

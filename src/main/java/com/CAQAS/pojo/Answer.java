@@ -3,32 +3,34 @@ package com.CAQAS.pojo;
 import java.util.Date;
 
 public class Answer {
-    private Integer aId;
+    private Integer answId;
 
-    private String title;
+    private String answTitle;
 
     private String keyWords;
 
-    private Integer aCategoryId;
+    private Date answTime;
 
-    private Date time;
+    private Integer answUserId;
 
-    private String content;
+    private Integer answCateId;
 
-    public Integer getaId() {
-        return aId;
+    private String answContent;
+
+    public Integer getAnswId() {
+        return answId;
     }
 
-    public void setaId(Integer aId) {
-        this.aId = aId;
+    public void setAnswId(Integer answId) {
+        this.answId = answId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getAnswTitle() {
+        return answTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+    public void setAnswTitle(String answTitle) {
+        this.answTitle = answTitle == null ? null : answTitle.trim();
     }
 
     public String getKeyWords() {
@@ -39,27 +41,35 @@ public class Answer {
         this.keyWords = keyWords == null ? null : keyWords.trim();
     }
 
-    public Integer getaCategoryId() {
-        return aCategoryId;
+    public Date getAnswTime() {
+        return answTime;
     }
 
-    public void setaCategoryId(Integer aCategoryId) {
-        this.aCategoryId = aCategoryId;
+    public void setAnswTime(Date answTime) {
+        this.answTime = answTime;
     }
 
-    public Date getTime() {
-        return time;
+    public Integer getAnswUserId() {
+        return answUserId;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setAnswUserId(Integer answUserId) {
+        this.answUserId = answUserId;
     }
 
-    public String getContent() {
-        return content;
+    public Integer getAnswCateId() {
+        return answCateId;
     }
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+    public void setAnswCateId(Integer answCateId) {
+        this.answCateId = answCateId;
+    }
+
+    public String getAnswContent() {
+        return answContent;
+    }
+
+    public void setAnswContent(String answContent) {
+        this.answContent = answContent == null ? null : answContent.trim();
     }
 }

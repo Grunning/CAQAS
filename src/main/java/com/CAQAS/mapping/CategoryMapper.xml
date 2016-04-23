@@ -2,70 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.CAQAS.dao.CategoryMapper" >
   <resultMap id="BaseResultMap" type="com.CAQAS.pojo.Category" >
-    <id column="c_id" property="cId" jdbcType="INTEGER" />
-    <result column="category" property="category" jdbcType="VARCHAR" />
-    <result column="type_dep_id" property="typeDepId" jdbcType="INTEGER" />
+    <id column="cate_id" property="cateId" jdbcType="INTEGER" />
+    <result column="cate_name" property="cateName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    c_id, category, type_dep_id
+    cate_id, cate_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from category
-    where c_id = #{cId,jdbcType=INTEGER}
+    where cate_id = #{cateId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from category
-    where c_id = #{cId,jdbcType=INTEGER}
+    where cate_id = #{cateId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.CAQAS.pojo.Category" >
-    insert into category (c_id, category, type_dep_id
-      )
-    values (#{cId,jdbcType=INTEGER}, #{category,jdbcType=VARCHAR}, #{typeDepId,jdbcType=INTEGER}
-      )
+    insert into category (cate_id, cate_name)
+    values (#{cateId,jdbcType=INTEGER}, #{cateName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.CAQAS.pojo.Category" >
     insert into category
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="cId != null" >
-        c_id,
+      <if test="cateId != null" >
+        cate_id,
       </if>
-      <if test="category != null" >
-        category,
-      </if>
-      <if test="typeDepId != null" >
-        type_dep_id,
+      <if test="cateName != null" >
+        cate_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="cId != null" >
-        #{cId,jdbcType=INTEGER},
+      <if test="cateId != null" >
+        #{cateId,jdbcType=INTEGER},
       </if>
-      <if test="category != null" >
-        #{category,jdbcType=VARCHAR},
-      </if>
-      <if test="typeDepId != null" >
-        #{typeDepId,jdbcType=INTEGER},
+      <if test="cateName != null" >
+        #{cateName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.CAQAS.pojo.Category" >
     update category
     <set >
-      <if test="category != null" >
-        category = #{category,jdbcType=VARCHAR},
-      </if>
-      <if test="typeDepId != null" >
-        type_dep_id = #{typeDepId,jdbcType=INTEGER},
+      <if test="cateName != null" >
+        cate_name = #{cateName,jdbcType=VARCHAR},
       </if>
     </set>
-    where c_id = #{cId,jdbcType=INTEGER}
+    where cate_id = #{cateId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.CAQAS.pojo.Category" >
     update category
-    set category = #{category,jdbcType=VARCHAR},
-      type_dep_id = #{typeDepId,jdbcType=INTEGER}
-    where c_id = #{cId,jdbcType=INTEGER}
+    set cate_name = #{cateName,jdbcType=VARCHAR}
+    where cate_id = #{cateId,jdbcType=INTEGER}
   </update>
 </mapper>

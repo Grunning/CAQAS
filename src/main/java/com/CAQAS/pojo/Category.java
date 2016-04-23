@@ -1,33 +1,23 @@
 package com.CAQAS.pojo;
 
 public class Category {
-    private Integer cId;
+    private Integer cateId;
 
-    private String category;
+    private String cateName;
 
-    private Integer typeDepId;
-
-    public Integer getcId() {
-        return cId;
+    public Integer getCateId() {
+        return cateId;
     }
 
-    public void setcId(Integer cId) {
-        this.cId = cId;
+    public void setCateId(Integer cateId) {
+        this.cateId = cateId;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCateName() {
+        return cateName;
     }
 
-    public void setCategory(String category) {
-        this.category = category == null ? null : category.trim();
-    }
-
-    public Integer getTypeDepId() {
-        return typeDepId;
-    }
-
-    public void setTypeDepId(Integer typeDepId) {
-        this.typeDepId = typeDepId;
+    public void setCateName(String cateName) {
+        this.cateName = cateName == null ? null : cateName.trim();
     }
 }

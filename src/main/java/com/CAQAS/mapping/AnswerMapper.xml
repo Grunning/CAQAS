@@ -2,20 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.CAQAS.dao.AnswerMapper" >
   <resultMap id="BaseResultMap" type="com.CAQAS.pojo.Answer" >
-    <id column="a_id" property="aId" jdbcType="INTEGER" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
+    <id column="answ_id" property="answId" jdbcType="INTEGER" />
+    <result column="answ_title" property="answTitle" jdbcType="VARCHAR" />
     <result column="key_words" property="keyWords" jdbcType="VARCHAR" />
-    <result column="a_category_id" property="aCategoryId" jdbcType="INTEGER" />
-    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="answ_time" property="answTime" jdbcType="TIMESTAMP" />
+    <result column="answ_user_id" property="answUserId" jdbcType="INTEGER" />
+    <result column="answ_cate_id" property="answCateId" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.CAQAS.pojo.Answer" extends="BaseResultMap" >
-    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="answ_content" property="answContent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    a_id, title, key_words, a_category_id, time
+    answ_id, answ_title, key_words, answ_time, answ_user_id, answ_cate_id
   </sql>
   <sql id="Blob_Column_List" >
-    content
+    answ_content
   </sql>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
     select 
@@ -23,99 +24,110 @@
     ,
     <include refid="Blob_Column_List" />
     from answer
-    where a_id = #{aId,jdbcType=INTEGER}
+    where answ_id = #{answId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from answer
-    where a_id = #{aId,jdbcType=INTEGER}
+    where answ_id = #{answId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.CAQAS.pojo.Answer" >
-    insert into answer (a_id, title, key_words, 
-      a_category_id, time, content
-      )
-    values (#{aId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{keyWords,jdbcType=VARCHAR}, 
-      #{aCategoryId,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
-      )
+    insert into answer (answ_id, answ_title, key_words, 
+      answ_time, answ_user_id, answ_cate_id, 
+      answ_content)
+    values (#{answId,jdbcType=INTEGER}, #{answTitle,jdbcType=VARCHAR}, #{keyWords,jdbcType=VARCHAR}, 
+      #{answTime,jdbcType=TIMESTAMP}, #{answUserId,jdbcType=INTEGER}, #{answCateId,jdbcType=INTEGER}, 
+      #{answContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.CAQAS.pojo.Answer" >
     insert into answer
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="aId != null" >
-        a_id,
+      <if test="answId != null" >
+        answ_id,
       </if>
-      <if test="title != null" >
-        title,
+      <if test="answTitle != null" >
+        answ_title,
       </if>
       <if test="keyWords != null" >
         key_words,
       </if>
-      <if test="aCategoryId != null" >
-        a_category_id,
+      <if test="answTime != null" >
+        answ_time,
       </if>
-      <if test="time != null" >
-        time,
+      <if test="answUserId != null" >
+        answ_user_id,
       </if>
-      <if test="content != null" >
-        content,
+      <if test="answCateId != null" >
+        answ_cate_id,
+      </if>
+      <if test="answContent != null" >
+        answ_content,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="aId != null" >
-        #{aId,jdbcType=INTEGER},
+      <if test="answId != null" >
+        #{answId,jdbcType=INTEGER},
       </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
+      <if test="answTitle != null" >
+        #{answTitle,jdbcType=VARCHAR},
       </if>
       <if test="keyWords != null" >
         #{keyWords,jdbcType=VARCHAR},
       </if>
-      <if test="aCategoryId != null" >
-        #{aCategoryId,jdbcType=INTEGER},
+      <if test="answTime != null" >
+        #{answTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="time != null" >
-        #{time,jdbcType=TIMESTAMP},
+      <if test="answUserId != null" >
+        #{answUserId,jdbcType=INTEGER},
       </if>
-      <if test="content != null" >
-        #{content,jdbcType=LONGVARCHAR},
+      <if test="answCateId != null" >
+        #{answCateId,jdbcType=INTEGER},
+      </if>
+      <if test="answContent != null" >
+        #{answContent,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.CAQAS.pojo.Answer" >
     update answer
     <set >
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
+      <if test="answTitle != null" >
+        answ_title = #{answTitle,jdbcType=VARCHAR},
       </if>
       <if test="keyWords != null" >
         key_words = #{keyWords,jdbcType=VARCHAR},
       </if>
-      <if test="aCategoryId != null" >
-        a_category_id = #{aCategoryId,jdbcType=INTEGER},
+      <if test="answTime != null" >
+        answ_time = #{answTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="time != null" >
-        time = #{time,jdbcType=TIMESTAMP},
+      <if test="answUserId != null" >
+        answ_user_id = #{answUserId,jdbcType=INTEGER},
       </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=LONGVARCHAR},
+      <if test="answCateId != null" >
+        answ_cate_id = #{answCateId,jdbcType=INTEGER},
+      </if>
+      <if test="answContent != null" >
+        answ_content = #{answContent,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where a_id = #{aId,jdbcType=INTEGER}
+    where answ_id = #{answId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.CAQAS.pojo.Answer" >
     update answer
-    set title = #{title,jdbcType=VARCHAR},
+    set answ_title = #{answTitle,jdbcType=VARCHAR},
       key_words = #{keyWords,jdbcType=VARCHAR},
-      a_category_id = #{aCategoryId,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP},
-      content = #{content,jdbcType=LONGVARCHAR}
-    where a_id = #{aId,jdbcType=INTEGER}
+      answ_time = #{answTime,jdbcType=TIMESTAMP},
+      answ_user_id = #{answUserId,jdbcType=INTEGER},
+      answ_cate_id = #{answCateId,jdbcType=INTEGER},
+      answ_content = #{answContent,jdbcType=LONGVARCHAR}
+    where answ_id = #{answId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.CAQAS.pojo.Answer" >
     update answer
-    set title = #{title,jdbcType=VARCHAR},
+    set answ_title = #{answTitle,jdbcType=VARCHAR},
       key_words = #{keyWords,jdbcType=VARCHAR},
-      a_category_id = #{aCategoryId,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP}
-    where a_id = #{aId,jdbcType=INTEGER}
+      answ_time = #{answTime,jdbcType=TIMESTAMP},
+      answ_user_id = #{answUserId,jdbcType=INTEGER},
+      answ_cate_id = #{answCateId,jdbcType=INTEGER}
+    where answ_id = #{answId,jdbcType=INTEGER}
   </update>
 </mapper>
