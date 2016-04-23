@@ -6,14 +6,12 @@
     <result column="answ_title" property="answTitle" jdbcType="VARCHAR" />
     <result column="key_words" property="keyWords" jdbcType="VARCHAR" />
     <result column="answ_time" property="answTime" jdbcType="TIMESTAMP" />
-    <result column="answ_user_id" property="answUserId" jdbcType="INTEGER" />
-    <result column="answ_cate_id" property="answCateId" jdbcType="INTEGER" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.CAQAS.pojo.Answer" extends="BaseResultMap" >
     <result column="answ_content" property="answContent" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    answ_id, answ_title, key_words, answ_time, answ_user_id, answ_cate_id
+    answ_id, answ_title, key_words, answ_time
   </sql>
   <sql id="Blob_Column_List" >
     answ_content
@@ -32,11 +30,9 @@
   </delete>
   <insert id="insert" parameterType="com.CAQAS.pojo.Answer" >
     insert into answer (answ_id, answ_title, key_words, 
-      answ_time, answ_user_id, answ_cate_id, 
-      answ_content)
+      answ_time, answ_content)
     values (#{answId,jdbcType=INTEGER}, #{answTitle,jdbcType=VARCHAR}, #{keyWords,jdbcType=VARCHAR}, 
-      #{answTime,jdbcType=TIMESTAMP}, #{answUserId,jdbcType=INTEGER}, #{answCateId,jdbcType=INTEGER}, 
-      #{answContent,jdbcType=LONGVARCHAR})
+      #{answTime,jdbcType=TIMESTAMP}, #{answContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.CAQAS.pojo.Answer" >
     insert into answer
@@ -52,12 +48,6 @@
       </if>
       <if test="answTime != null" >
         answ_time,
-      </if>
-      <if test="answUserId != null" >
-        answ_user_id,
-      </if>
-      <if test="answCateId != null" >
-        answ_cate_id,
       </if>
       <if test="answContent != null" >
         answ_content,
@@ -76,12 +66,6 @@
       <if test="answTime != null" >
         #{answTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="answUserId != null" >
-        #{answUserId,jdbcType=INTEGER},
-      </if>
-      <if test="answCateId != null" >
-        #{answCateId,jdbcType=INTEGER},
-      </if>
       <if test="answContent != null" >
         #{answContent,jdbcType=LONGVARCHAR},
       </if>
@@ -99,12 +83,6 @@
       <if test="answTime != null" >
         answ_time = #{answTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="answUserId != null" >
-        answ_user_id = #{answUserId,jdbcType=INTEGER},
-      </if>
-      <if test="answCateId != null" >
-        answ_cate_id = #{answCateId,jdbcType=INTEGER},
-      </if>
       <if test="answContent != null" >
         answ_content = #{answContent,jdbcType=LONGVARCHAR},
       </if>
@@ -116,8 +94,6 @@
     set answ_title = #{answTitle,jdbcType=VARCHAR},
       key_words = #{keyWords,jdbcType=VARCHAR},
       answ_time = #{answTime,jdbcType=TIMESTAMP},
-      answ_user_id = #{answUserId,jdbcType=INTEGER},
-      answ_cate_id = #{answCateId,jdbcType=INTEGER},
       answ_content = #{answContent,jdbcType=LONGVARCHAR}
     where answ_id = #{answId,jdbcType=INTEGER}
   </update>
@@ -126,8 +102,6 @@
     set answ_title = #{answTitle,jdbcType=VARCHAR},
       key_words = #{keyWords,jdbcType=VARCHAR},
       answ_time = #{answTime,jdbcType=TIMESTAMP},
-      answ_user_id = #{answUserId,jdbcType=INTEGER},
-      answ_cate_id = #{answCateId,jdbcType=INTEGER}
     where answ_id = #{answId,jdbcType=INTEGER}
   </update>
 </mapper>

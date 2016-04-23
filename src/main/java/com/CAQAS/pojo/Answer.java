@@ -11,10 +11,6 @@ public class Answer {
 
     private Date answTime;
 
-    private Integer answUserId;
-
-    private Integer answCateId;
-
     private String answContent;
 
     public Integer getAnswId() {
@@ -47,22 +43,6 @@ public class Answer {
 
     public void setAnswTime(Date answTime) {
         this.answTime = answTime;
-    }
-
-    public Integer getAnswUserId() {
-        return answUserId;
-    }
-
-    public void setAnswUserId(Integer answUserId) {
-        this.answUserId = answUserId;
-    }
-
-    public Integer getAnswCateId() {
-        return answCateId;
-    }
-
-    public void setAnswCateId(Integer answCateId) {
-        this.answCateId = answCateId;
     }
 
     public String getAnswContent() {

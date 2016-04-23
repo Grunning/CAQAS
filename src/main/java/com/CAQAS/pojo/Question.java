@@ -11,9 +11,11 @@ public class Question {
 
     private Integer quesAnswId;
 
-    private Date quesTime;
-
-    private Date quesAnswerTime;
+    private Date quesCreateTime;
+    
+    private Integer quesUserId;
+    
+    private Integer quesCateId;
 
     public Integer getQuesId() {
         return quesId;
@@ -47,19 +49,28 @@ public class Question {
         this.quesAnswId = quesAnswId;
     }
 
-    public Date getQuesTime() {
-        return quesTime;
-    }
+	public Date getQuesCreateTime() {
+		return quesCreateTime;
+	}
 
-    public void setQuesTime(Date quesTime) {
-        this.quesTime = quesTime;
-    }
+	public void setQuesCreateTime(Date quesCreateTime) {
+		this.quesCreateTime = quesCreateTime;
+	}
 
-    public Date getQuesAnswerTime() {
-        return quesAnswerTime;
-    }
+	public Integer getQuesUserId() {
+		return quesUserId;
+	}
 
-    public void setQuesAnswerTime(Date quesAnswerTime) {
-        this.quesAnswerTime = quesAnswerTime;
-    }
+	public void setQuesUserId(Integer quesUserId) {
+		this.quesUserId = quesUserId;
+	}
+
+	public Integer getQuesCateId() {
+		return quesCateId;
+	}
+
+	public void setQuesCateId(Integer quesCateId) {
+		this.quesCateId = quesCateId;
+	}
+
 }
