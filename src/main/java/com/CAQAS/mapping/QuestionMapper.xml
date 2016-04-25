@@ -19,6 +19,54 @@
     from question
     where ques_id = #{quesId,jdbcType=INTEGER}
   </select>
+  
+  <!-- 查询对应管理员下的所有问题 -->
+  <select id="selectQuestionsByUserId" resultType="com.CAQAS.model.QuestionsResultModel">
+  	select
+  		ques_id as "quesId",
+  		ques_title as "quesTitle",
+  		search_num as "searchNum",
+  		ques_create_time as "quesCreateTime",
+  		answ_title as "answTitle",
+  		answ_content as "answContent",
+  		answ_time as "answTime"
+  	from
+  		question
+  	left join
+  		answer
+  	on
+  		ques_answ_id = answ_id
+  	where
+  		1 = 1
+  	and
+  		ques_user_id = #{quesUserId,jdbcType=INTEGER}
+  	<if test="solved == 1">
+  	and answ_content is not null
+  	</if>
+  	<if test="solved == 0">
+  	and answ_content is null
+  	</if>
+  	order by ques_create_time desc
+  	limit #{page,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 根据问题Id查询标题和内容 -->
+  <select id="selectByQuesId" resultType="com.CAQAS.model.QuestionsResultModel" parameterType="java.lang.Integer">
+  	select
+  		ques_id as "quesId",
+  		ques_title as "quesTitle",
+  		answ_content as "answContent"
+  	from
+  		question
+  	left join
+  		answer
+  	on
+  		ques_answ_id = answ_id
+  	where
+  		1 = 1
+  	and
+  		ques_id = #{quesId, jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from question
     where ques_id = #{quesId,jdbcType=INTEGER}
@@ -93,7 +141,7 @@
       <if test="quesAnswId != null" >
         ques_answ_id = #{quesAnswId,jdbcType=INTEGER},
       </if>
-      <if test="quesAnswerTime != null" >
+      <if test="quesCreateTime != null" >
         ques_create_time = #{quesCreateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="quesUserId != null" >

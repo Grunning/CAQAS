@@ -31,7 +31,12 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="https://www.baidu.com">Answer Commit</a>
+				<a class="navbar-brand" href="/CAQAS/admin-home.html">Home</a>
+				<a class="navbar-brand" href="/CAQAS/admin-question.html">Question</a>
+				<a class="navbar-brand" href="/CAQAS/admin-answer.html">Answer</a>
+				<a class="navbar-brand" href="/CAQAS/admin-department.html">Department</a>
+				<a class="navbar-brand" href="/CAQAS/admin-category.html">Category</a>
+				<a class="navbar-brand" href="/CAQAS/admin-user.html">User</a>
 			</div>
 			<!-- <div id="navbar" class="navbar-collapse collapse">
 				<form class="navbar-form navbar-right">
@@ -48,6 +53,7 @@
 				<div class="navbar-form navbar-right">
 					<button class="btn btn-success" onclick="javascript:logout();">logout</button>
 				</div>
+				<div id="userName"></div>
 			</div>
 			<!--/.navbar-collapse -->
 		</div>
@@ -58,6 +64,14 @@
 </button> -->
 	<div class="jumbotron">
 		<div class="container">
+			<div id="navigation">
+				<ol class="breadcrumb">
+					<li>导航：</li>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">2013</a></li>
+					<li class="active">十一月</li>
+				</ol>
+			</div>
 			<p>问题标题：</p>
 
 			<input type="text" class="form-control" id="title"
@@ -82,8 +96,6 @@
 	<footer>
 		<p>&copy; Company 2016</p>
 	</footer>
-	</div>
-	<!-- /container -->
 
 	<script type="text/javascript">
 		var ue = UE.getEditor('editor');
@@ -95,7 +107,7 @@
 		}
 		
 		//初始化自动加载函数
-		/* window.onload=function() {
+		window.onload=function(){
 			var data = {};
 			var result = ajax("POST", "getUserSession", data, "json");
 			if (result == undefined) {
@@ -104,9 +116,20 @@
 				array = url.split("/CAQAS/");
 				var newURL = array[0] + "/CAQAS/login.html";
 				self.location = newURL;				
+			} else {
+				$("#userName").html("<div class='navbar-form navbar-right'>"
+						+"<p style='color:white;margin-top:4px;'>用户名："+ result.userName +"</p></div>");
+				var url = window.location.href;
+				if (url.indexOf("?") != -1) {
+					var arr = [];
+					arr = url.split("?");
+					var id = arr[1].split("=")[1];
+					var dataSearch = {"quesId":id};
+					var map = ajax("POST", "selectByQuesId", dataSearch, "json");
+					document.getElementById("title").value = map.quesTitle;
+				}
 			}
-		} */
-		
+		}
 	</script>
 </body>
 </html>

@@ -34,7 +34,7 @@
     values (#{answId,jdbcType=INTEGER}, #{answTitle,jdbcType=VARCHAR}, #{keyWords,jdbcType=VARCHAR}, 
       #{answTime,jdbcType=TIMESTAMP}, #{answContent,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.CAQAS.pojo.Answer" >
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="answId" parameterType="com.CAQAS.pojo.Answer" >
     insert into answer
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="answId != null" >

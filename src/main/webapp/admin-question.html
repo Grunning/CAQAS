@@ -13,9 +13,12 @@
 <link href="css/jumbotron.css" rel="stylesheet">
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
-<script src="/ie-emulation-modes-warning.js"></script>
+<!-- <script type="text/javascript" src="js/bootstrap/bootstrap-modal.js"></script> -->
+<script type="text/javascript" src="js/admin-question.js"></script>
+<!-- <script type="text/javascript" src="js/admin-answer.js"></script> -->
 <script type="text/javascript" src="js/common-js/ajax-request.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
 
 </head>
 
@@ -24,38 +27,113 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="">Questions Management</a>
+				<!-- <a href="" style="color:white;font-size:20px;">Questions Management</a> -->
+				<a class="navbar-brand" href="/CAQAS/admin-home.html">Home</a>
+				<a class="navbar-brand" href="/CAQAS/admin-question.html">Question</a>
+				<a class="navbar-brand" href="/CAQAS/admin-answer.html">Answer</a>
+				<a class="navbar-brand" href="/CAQAS/admin-department.html">Department</a>
+				<a class="navbar-brand" href="/CAQAS/admin-category.html">Category</a>
+				<a class="navbar-brand" href="/CAQAS/admin-user.html">User</a>
 			</div>
-			<div class="navbar-header navbar-form navbar-left">
-				<button class="btn btn-primary" onclick="">已解决</button>
-				<button class="btn btn-warning" onclick="">待解决</button>
-			</div>
+			<!-- <div class="navbar-header navbar-form navbar-left">
+				<button class="btn btn-default" onclick="javascript:selectAll();">全部</button>
+				<button class="btn btn-primary" onclick="javascript:selectIsSolved();">已解决</button>
+				<button class="btn btn-warning" onclick="javascript:selectNotSolved();">待解决</button>
+			</div> -->
 			<div id="navbar" class="navbar-collapse collapse">
 				<div class="navbar-form navbar-right">
 					<button class="btn btn-success" onclick="javascript:logout();">logout</button>
 				</div>
+				<div id="userName"></div>
+				<!-- <div class="navbar-form navbar-right">
+					<p style="color:white;margin-top:4px;">admin</p>
+				</div> -->
 			</div>
 		</div>
 	</nav>
 	<div class="jumbotron">
 		<div class="container">
-			<div class="panel panel-warning panel-body">
-				<!-- <div class="panel-body"> -->
+			<div id="navigation">
+				<ol class="breadcrumb">
+					<li>导航：</li>
+					<li><a href="/CAQAS/admin-home.html">Home</a></li>
+					<li><a href="#">2013</a></li>
+					<li class="active">十一月</li>
+				</ol>
+			</div>
+			<div style="margin-bottom:10px;">
+				<button class="btn btn-default" onclick="javascript:selectAll();">&nbsp;全&nbsp;部&nbsp;</button>
+				<button class="btn btn-primary" onclick="javascript:selectIsSolved();">已解决</button>
+				<button class="btn btn-warning" onclick="javascript:selectNotSolved();">待解决</button>
+			</div>
+			<div id="question">
+			</div>
+			<!-- <div class="panel panel-warning panel-body">
 				<span>Basic panel
-					example技术的jfk大家看法了道具收费的的jfk来说接口规范的数据库管理的方式看风景开始减肥的蝴蝶结发开始就jfk见哈世界的看法就哈收到话费卡是否健康的撒谎附近的哈佛啊看了都会反馈撒谎地方</span>
+					example技术的jfk大家看法了道具收费的的jfk来说接口规范的数据库管理的方式看风景开</span>
 				<button class="btn btn-warning btn-xs navbar-right"
 					style="margin-right: 20px;">回答</button>
-				<!-- </div> -->
+				<button class="btn btn-danger btn-xs navbar-right"
+					style="margin-right: 5px;">检查</button>
+				<span class="navbar-right" style="margin-right: 20px;">2016-4-23</span>
 			</div>
-			<div class="panel panel-info">
-				<div class="panel-body">
-					<span>Basic panel example</span>
-					<button class="btn btn-primary btn-xs navbar-right"
-						style="margin-right: 20px;">修改</button>
-					<button class="btn btn-info btn-xs navbar-right"
-						style="margin-right: 5px;">查看</button>
+			<div class="panel panel-info panel-body">
+				<span>Basic panel example</span>
+				<button class="btn btn-primary btn-xs navbar-right" value="2" onclick="javascript:updateAnswer(this);"
+					style="margin-right: 20px;">修改</button>
+				<button class="btn btn-info btn-xs navbar-right" data-toggle="modal"
+					data-target="#myModal" onclick="javascript:searchContent();" style="margin-right: 5px;">查看</button>
+				<span class="navbar-right" style="margin-right: 20px;">2016-4-23</span>
+			</div> -->
+			<!-- 模态框（Modal） -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<!-- 问题标题 动态加载id为title -->
+							<div id="title">
+								<!-- <h4 class="modal-title" id="myModalLabel">
+									模态框（Modal）标题等哈就是空的房间啊卡里的好伐啦接受对方阿斯顿jfk落谁家的风口浪尖萨拉分厘卡三季稻付款了大家
+								</h4> -->
+							</div>
+						</div>
+						<!-- 回答内容 动态加载id为content-->
+						<div id="content">
+							<!-- <p style="text-align: center;">
+								<img
+									src="ueditor/jsp/upload/image/20160423/1461412093895000972.png"
+									title="1461412093895000972.png"
+									alt="1ab90065eb3e780481a37aea4e451222_b.png" />
+							</p>
+							<p style="text-align: center;">时间的话放假撒法</p>
+							<p>哈哈</p>
+							<p style="line-height: 16px;">
+								<img style="vertical-align: middle; margin-right: 2px;"
+									src="http://localhost:8080/CAQAS/dialogs/attachment/fileTypeImages/icon_rar.gif" /><a
+									style="font-size: 12px; color: #0066cc;"
+									href="ueditor/jsp/upload/file/20160423/1461412149863037220.zip"
+									title="ueditor1_4_3_2-utf8-jsp.zip">ueditor1_4_3_2-utf8-jsp.zip</a>
+							</p>
+							<p>
+								<br />
+							</p> -->
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">关闭</button>
+						</div>
+					</div>
 				</div>
 			</div>
+			<div id="page">
+			</div>
+			<ul class="pager">
+				<li><button class="btn btn-primary btn-sm navbar-middle" onclick="javascript:getPreviousPage();">上一页</button></li>
+				<li><button class="btn btn-primary btn-sm navbar-middle" onclick="javascript:getNextPage();">下一页</button></li>
+			</ul>
 		</div>
 	</div>
 	<hr>
@@ -64,7 +142,21 @@
 	</footer>
 
 	<script type="text/javascript">
-		
+		window.onload=function() {
+			var data = {};
+			var result = ajax("POST", "getUserSession", data, "json");
+			if (result == undefined) {
+				var array = [];
+				var url = window.location.href;
+				array = url.split("/CAQAS/");
+				var newURL = array[0] + "/CAQAS/login.html";
+				self.location = newURL;				
+			} else {
+				$("#userName").html("<div class='navbar-form navbar-right'>"
+						+"<p style='color:white;margin-top:4px;'>用户名："+ result.userName +"</p></div>");					
+				selectAllQuestions();
+			}
+		}
 	</script>
 </body>
 </html>
