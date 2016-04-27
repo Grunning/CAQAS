@@ -6,6 +6,10 @@ public class User {
     private String userName;
 
     private String userPassword;
+    
+    private Integer userRole;
+    
+    private String userMail;
 
     private Integer userDepId;
 
@@ -33,7 +37,23 @@ public class User {
         this.userPassword = userPassword == null ? null : userPassword.trim();
     }
 
-    public Integer getUserDepId() {
+    public Integer getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(Integer userRole) {
+		this.userRole = userRole;
+	}
+
+	public String getUserMail() {
+		return userMail;
+	}
+
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
+	}
+
+	public Integer getUserDepId() {
         return userDepId;
     }
 

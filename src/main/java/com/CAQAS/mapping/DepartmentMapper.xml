@@ -8,6 +8,13 @@
   <sql id="Base_Column_List" >
     dep_id, dep_name
   </sql>
+  <!-- 查询所有部门 -->
+  <select id="selectAllDepartments" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from department
+  	limit #{page,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -43,7 +50,7 @@
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.CAQAS.pojo.Department" >
     update department
-    <set >
+    <set>
       <if test="depName != null" >
         dep_name = #{depName,jdbcType=VARCHAR},
       </if>

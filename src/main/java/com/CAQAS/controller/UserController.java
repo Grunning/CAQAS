@@ -83,4 +83,73 @@ public class UserController {
 		map.put("result", 1);
 		return map;
 	}
+	
+	/**
+	 * 查询所有用户.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/selectAllUsers")
+	public Map<String, Object> selectAllUsers(HttpServletRequest request) {
+		Integer page = Integer.parseInt(request.getParameter("page"));
+		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		return userService.selectAllUsers((page - 1)*pageNum, pageNum);
+	}
+	
+	/**
+	 * 管理员添加普通用户.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/insertUser")
+	public Integer insertUser(HttpServletRequest request) {
+		String userName = request.getParameter("userName");
+		String userPassword = "123456";
+		Integer userRole = 1;
+		String userMail = request.getParameter("userMail");
+		Integer userDepId = Integer.parseInt(request.getParameter("userDepId"));
+		User user = new User();
+		user.setUserName(userName);
+		user.setUserPassword(userPassword);
+		user.setUserRole(userRole);
+		user.setUserMail(userMail);
+		user.setUserDepId(userDepId);
+		return userService.insertSelective(user);
+	}
+	
+	/**
+	 * 修改用户信息.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/updateUser")
+	public Integer updateUser(HttpServletRequest request) {
+		Integer userId = Integer.parseInt(request.getParameter("userId"));
+		String userName = request.getParameter("userName");
+		String userPassword = request.getParameter("userPassword");
+		String userMail = request.getParameter("userMail");
+		Integer userDepId = Integer.parseInt(request.getParameter("userDepId"));
+		User user = new User();
+		user.setUserId(userId);
+		user.setUserName(userName);
+		user.setUserPassword(userPassword);
+		user.setUserMail(userMail);
+		user.setUserDepId(userDepId);
+		return userService.updateByPrimaryKeySelective(user);
+	}
+	
+	/**
+	 * 删除用户.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/deleteUser")
+	public Integer deleteUser(HttpServletRequest request) {
+		Integer userId = Integer.parseInt(request.getParameter("userId"));
+		return userService.deleteByPrimaryKey(userId);
+	}
 }

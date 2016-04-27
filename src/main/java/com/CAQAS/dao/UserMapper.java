@@ -1,5 +1,10 @@
 package com.CAQAS.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.CAQAS.model.UserResultModel;
 import com.CAQAS.pojo.User;
 
 public interface UserMapper {
@@ -16,4 +21,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    
+    List<UserResultModel> selectAllUsers(@Param("page")Integer page, @Param("pageNum")Integer pageNum);
 }

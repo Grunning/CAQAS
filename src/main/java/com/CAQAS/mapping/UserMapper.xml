@@ -5,11 +5,27 @@
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_role" property="userRole" jdbcType="INTEGER" />
+    <result column="user_mail" property="userMail" jdbcType="VARCHAR" />
     <result column="user_dep_id" property="userDepId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_id, user_name, user_password, user_dep_id
+    user_id, user_name, user_password, user_role, user_mail, user_dep_id
   </sql>
+  <!-- 查询所有用户 -->
+  <select id="selectAllUsers" resultType="com.CAQAS.model.UserResultModel">
+  	select
+  		user_id as "userId",
+  		user_name as "userName",
+  		user_role as "userRole",
+  		user_mail as "userMail",
+  		user_dep_id as "userDepId",
+  		dep_name as "userDepName"
+  	from user
+  	left join department
+  	on user_dep_id = dep_id
+  	limit #{page,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -44,6 +60,12 @@
       <if test="userPassword != null" >
         user_password,
       </if>
+      <if test="userRole != null">
+      	user_role,
+      </if>
+      <if test="userMail != null">
+      	user_mail,
+      </if>
       <if test="userDepId != null" >
         user_dep_id,
       </if>
@@ -57,6 +79,12 @@
       </if>
       <if test="userPassword != null" >
         #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userRole != null" >
+        #{userRole,jdbcType=INTEGER},
+      </if>
+      <if test="userMail != null" >
+        #{userMail,jdbcType=VARCHAR},
       </if>
       <if test="userDepId != null" >
         #{userDepId,jdbcType=INTEGER},
@@ -72,6 +100,12 @@
       <if test="userPassword != null" >
         user_password = #{userPassword,jdbcType=VARCHAR},
       </if>
+      <if test="userRole != null" >
+        user_role = #{userRole,jdbcType=INTEGER},
+      </if>
+      <if test="userMail != null" >
+        user_mail = #{userMail,jdbcType=VARCHAR},
+      </if>
       <if test="userDepId != null" >
         user_dep_id = #{userDepId,jdbcType=INTEGER},
       </if>
@@ -82,6 +116,8 @@
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
       user_password = #{userPassword,jdbcType=VARCHAR},
+      user_role = #{userRole,jdbcType=INTEGER},
+      user_mail = #{userMail,jdbcType=VARCHAR},
       user_dep_id = #{userDepId,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
