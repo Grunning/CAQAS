@@ -13,6 +13,7 @@
   	select
   	<include refid="Base_Column_List" />
   	from category
+  	limit #{page,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,6 +24,15 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from category
     where cate_id = #{cateId,jdbcType=INTEGER}
+  </delete>
+  <!-- 批量删除类别 -->
+  <delete id="deleteBatchCategory" parameterType="java.util.List">
+  delete
+  from category
+  where cate_id in
+  <foreach item="cateId" collection="list" open="(" separator="," close=")">
+  #{cateId,jdbcType=VARCHAR}
+  </foreach>
   </delete>
   <insert id="insert" parameterType="com.CAQAS.pojo.Category" >
     insert into category (cate_id, cate_name)

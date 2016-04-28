@@ -86,6 +86,7 @@ function updateDepartment() {
 
 //点击添加按钮
 function isInsertDep() {
+	document.getElementById("departmentName").value = "";
 	isAdd = 1;
 }
 

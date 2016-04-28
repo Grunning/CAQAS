@@ -26,7 +26,9 @@ public class CategoryController {
 	@ResponseBody
 	@RequestMapping("/selectAllCategories")
 	public Map<String, Object> selectAllCategories(HttpServletRequest request) {
-		return categoryService.selectAllCategories();
+		Integer page = Integer.parseInt(request.getParameter("page"));
+		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		return categoryService.selectAllCategories(page, pageNum);
 	}
 	
 	/**
@@ -57,6 +59,18 @@ public class CategoryController {
 		category.setCateId(cateId);
 		category.setCateName(cateName);
 		return categoryService.updateByPrimaryKeySelective(category);
+	}
+	
+	/**
+	 * 批量删除.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/deleteBatchCategory")
+	public Integer deleteBatchCategory(HttpServletRequest request) {
+		String cateIds = request.getParameter("cateIds");
+		return categoryService.deleteBatchCategory(cateIds);
 	}
 	
 }

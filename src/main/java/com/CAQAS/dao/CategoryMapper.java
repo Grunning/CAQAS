@@ -2,6 +2,8 @@ package com.CAQAS.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.CAQAS.pojo.Category;
 
 public interface CategoryMapper {
@@ -17,5 +19,7 @@ public interface CategoryMapper {
 
     int updateByPrimaryKey(Category record);
     
-    List<Category> selectAllCategories();
+    List<Category> selectAllCategories(@Param("page")Integer page, @Param("pageNum")Integer pageNum);
+    
+    int deleteBatchCategory(List<String> list);
 }
