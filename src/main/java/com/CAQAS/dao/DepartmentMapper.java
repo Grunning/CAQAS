@@ -24,4 +24,11 @@ public interface DepartmentMapper {
      * @return
      */
     List<Department> selectAllDepartments(@Param("page")Integer page, @Param("pageNum")Integer pageNum);
+    
+    /**
+     * 批量删除.
+     * @param depIds
+     * @return
+     */
+    int deleteBatchDep(List<String> list);
 }

@@ -137,7 +137,19 @@ function deleteDepartment() {
 		if (obj[i].checked)
 			checkArray.push(obj[i].value);
 	}
-	alert(checkArray);
+	if (checkArray.length > 0) {
+		var data = {"depIds":checkArray.join()};
+		var result = ajax("POST", "deleteBatchDep", data, "json");
+		if (result != 0) {
+			alert("成功删除 " + result + " 条！");
+			location.reload();
+		} else {
+			alert("删除 " + result + " 条！，删除失败！")
+			location.reload();
+		}
+	} else {
+		alert("请勾选要删除的行！");
+	}
 }
 
 //下一页

@@ -1,6 +1,8 @@
 package com.CAQAS.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -33,6 +35,15 @@ public class IDepartmentService implements DepartmentService {
 
 	public int deleteByPrimaryKey(Integer depId) {
 		return departmentMapper.deleteByPrimaryKey(depId);
+	}
+
+	public int deleteBatchDep(String depIds) {
+		String[] array = depIds.split(",");
+		List<String> list = new ArrayList<String>();
+		for (String s : array) {
+			list.add(s);
+		}
+		return departmentMapper.deleteBatchDep(list);
 	}
 
 }

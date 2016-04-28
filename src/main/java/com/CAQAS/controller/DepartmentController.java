@@ -73,4 +73,16 @@ public class DepartmentController {
 		return departmentService.deleteByPrimaryKey(depId);
 	}
 	
+	/**
+	 * 批量删除.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/deleteBatchDep")
+	public Integer deleteBatchDep(HttpServletRequest request) {
+		String depIds = request.getParameter("depIds");
+		return departmentService.deleteBatchDep(depIds);
+	}
+	
 }

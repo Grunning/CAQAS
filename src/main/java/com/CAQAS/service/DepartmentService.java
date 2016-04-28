@@ -31,4 +31,11 @@ public interface DepartmentService {
 	 * @return 结果
 	 */
 	int deleteByPrimaryKey(Integer depId);
+	
+	/**
+	 * 批量删除.
+	 * @param depIds 部门Ids
+	 * @return 结果
+	 */
+	int deleteBatchDep(String depIds);
 }
