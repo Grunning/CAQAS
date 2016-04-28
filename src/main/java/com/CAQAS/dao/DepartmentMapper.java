@@ -31,4 +31,11 @@ public interface DepartmentMapper {
      * @return
      */
     int deleteBatchDep(List<String> list);
+    
+    /**
+     * 通过部门名字查询.
+     * @param depName depName部门名字
+     * @return 结果
+     */ 
+    Department selectByDepName(String depName);
 }

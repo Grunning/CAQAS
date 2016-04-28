@@ -38,4 +38,11 @@ public interface DepartmentService {
 	 * @return 结果
 	 */
 	int deleteBatchDep(String depIds);
+	
+	/**
+	 * 通过部门名字查询.
+	 * @param depName depName部门名字
+	 * @return 结果
+	 */
+	Department selectByDepName(String depName);
 }

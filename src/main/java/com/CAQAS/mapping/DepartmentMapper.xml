@@ -13,13 +13,22 @@
   	select
   	<include refid="Base_Column_List"/>
   	from department
+  	<if test="page != -1 and pageNum != -1">
   	limit #{page,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
+  	</if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from department
     where dep_id = #{depId,jdbcType=INTEGER}
+  </select>
+  <!-- 通过部门名字查询 -->
+  <select id="selectByDepName" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select
+  <include refid="Base_Column_List" />
+  from department
+  where dep_name = #{depName,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from department

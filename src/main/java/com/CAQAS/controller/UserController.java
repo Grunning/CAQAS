@@ -142,6 +142,22 @@ public class UserController {
 	}
 	
 	/**
+	 * 重置密码.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/resetPassword")
+	public Integer resetPassword(HttpServletRequest request) {
+		Integer userId = Integer.parseInt(request.getParameter("userId"));
+		String userPassword = "123456";
+		User user = new User();
+		user.setUserId(userId);
+		user.setUserPassword(userPassword);
+		return userService.updateByPrimaryKeySelective(user);
+	}
+	
+	/**
 	 * 删除用户.
 	 * @param request request对象
 	 * @return 结果

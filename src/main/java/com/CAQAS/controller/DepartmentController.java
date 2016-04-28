@@ -32,6 +32,18 @@ public class DepartmentController {
 	}
 	
 	/**
+	 * 根据部门名字查询.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/selectByDepName")
+	public Department selectByDepName(HttpServletRequest request) {
+		String depName = request.getParameter("depName");
+		return departmentService.selectByDepName(depName);
+	}
+	
+	/**
 	 * 添加.
 	 * @param request request对象
 	 * @return 结果

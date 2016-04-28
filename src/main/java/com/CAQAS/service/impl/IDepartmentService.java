@@ -46,4 +46,8 @@ public class IDepartmentService implements DepartmentService {
 		return departmentMapper.deleteBatchDep(list);
 	}
 
+	public Department selectByDepName(String depName) {
+		return departmentMapper.selectByDepName(depName);
+	}
+
 }
