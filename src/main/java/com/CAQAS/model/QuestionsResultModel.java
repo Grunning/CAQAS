@@ -8,6 +8,7 @@ public class QuestionsResultModel {
 	private String answTitle;
 	private String answContent;//答复内容
 	private String answTime;//答复时间
+	private String cateName;//问题类别
 	
 	public Integer getQuesId() {
 		return quesId;
@@ -50,6 +51,12 @@ public class QuestionsResultModel {
 	}
 	public void setAnswTime(String answTime) {
 		this.answTime = answTime;
+	}
+	public String getCateName() {
+		return cateName;
+	}
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
 	}
 	
 }

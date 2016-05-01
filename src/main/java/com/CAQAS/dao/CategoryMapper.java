@@ -19,7 +19,12 @@ public interface CategoryMapper {
 
     int updateByPrimaryKey(Category record);
     
-    List<Category> selectAllCategories(@Param("page")Integer page, @Param("pageNum")Integer pageNum);
+    List<Category> selectAllCategories(@Param("page")Integer page, @Param("pageNum")Integer pageNum, 
+    		@Param("role")Integer role, @Param("userId")Integer userId);
     
     int deleteBatchCategory(List<String> list);
+    
+    List<Category> selectAllCates(Integer cateUserId);
+    
+    Category selectByCateName(String cateName);
 }

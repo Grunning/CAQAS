@@ -21,7 +21,9 @@ public interface QuestionMapper {
     int updateByPrimaryKey(Question record);
     
     List<QuestionsResultModel> selectQuestionsByUserId(@Param("quesUserId") Integer quesUserId, @Param("page")Integer page, 
-    		@Param("pageNum")Integer pageNum, @Param("solved")Integer solved);
+    		@Param("pageNum")Integer pageNum, @Param("solved")Integer solved, @Param("role")Integer role);
+    
+    List<QuestionsResultModel> selectQuestionsByAdmin(@Param("page")Integer page, @Param("pageNum")Integer pageNum, @Param("role")Integer role);
     
     QuestionsResultModel selectByQuesId(Integer quesId);
 }

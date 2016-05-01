@@ -3,6 +3,7 @@ package com.CAQAS.controller;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.CAQAS.pojo.Category;
+import com.CAQAS.pojo.User;
 import com.CAQAS.service.CategoryService;
 
 @Controller
@@ -25,10 +27,38 @@ public class CategoryController {
 	 */
 	@ResponseBody
 	@RequestMapping("/selectAllCategories")
-	public Map<String, Object> selectAllCategories(HttpServletRequest request) {
+	public Map<String, Object> selectAllCategories(HttpServletRequest request, HttpSession session) {
 		Integer page = Integer.parseInt(request.getParameter("page"));
 		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
-		return categoryService.selectAllCategories(page, pageNum);
+		User user = (User) session.getAttribute("user");
+		Integer role = user.getUserRole();
+		Integer userId = user.getUserId();
+		return categoryService.selectAllCategories(page, pageNum, role, userId);
+	}
+	
+	/**
+	 * 查询下拉框所有问题分类.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/selectAllCates")
+	public Map<String, Object> selectAllCates(HttpServletRequest request, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		Integer cateUserId = user.getUserId();
+		return categoryService.selectAllCates(cateUserId);
+	}
+	
+	/**
+	 * 根据类别名字查询.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/selectByCateName")
+	public Category selectByCateName(HttpServletRequest request) {
+		String cateName = request.getParameter("cateName");
+		return categoryService.selectByCateName(cateName);
 	}
 	
 	/**
@@ -38,10 +68,13 @@ public class CategoryController {
 	 */
 	@ResponseBody
 	@RequestMapping("/insertCategory")
-	public Integer insertCategory(HttpServletRequest request) {
+	public Integer insertCategory(HttpServletRequest request, HttpSession session) {
 		String cateName = request.getParameter("cateName");
+		User user = (User) session.getAttribute("user");
+		Integer cateUserId = user.getUserId();
 		Category category = new Category();
 		category.setCateName(cateName);
+		category.setCateUserId(cateUserId);
 		return categoryService.insertSelective(category);
 	}
 	

@@ -9,7 +9,20 @@ public interface CategoryService {
 	 * 查询所有类别.
 	 * @return 结果
 	 */
-	Map<String, Object> selectAllCategories(Integer page, Integer pageNum);
+	Map<String, Object> selectAllCategories(Integer page, Integer pageNum, Integer role, Integer userId);
+	
+	/**
+	 * 问题类别下拉框.
+	 * @return 结果
+	 */
+	Map<String, Object> selectAllCates(Integer cateUserId);
+	
+	/**
+	 * 根据类别名查询.
+	 * @param cateName cateName类别名称
+	 * @return 结果
+	 */
+	Category selectByCateName(String cateName);
 	
 	/**
 	 * 添加.

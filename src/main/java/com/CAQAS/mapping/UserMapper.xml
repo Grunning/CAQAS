@@ -32,6 +32,13 @@
     from user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
+  <!-- 根据部门Id查询 -->
+  <select id="selectUserByDepId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  select
+  <include refid="Base_Column_List" />
+  from user
+  where user_dep_id = #{userDepId,jdbcType=INTEGER}
+  </select>
   <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
   	select
   	<include refid="Base_Column_List" />

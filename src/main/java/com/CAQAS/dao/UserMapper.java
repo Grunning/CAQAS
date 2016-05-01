@@ -23,4 +23,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
     
     List<UserResultModel> selectAllUsers(@Param("page")Integer page, @Param("pageNum")Integer pageNum);
+    
+    List<User> selectUserByDepId(Integer userDepId);
 }

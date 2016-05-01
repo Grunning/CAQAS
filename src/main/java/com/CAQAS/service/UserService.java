@@ -28,6 +28,13 @@ public interface UserService {
 	public Map<String, Object> selectAllUsers(Integer page, Integer pageNum);
 	
 	/**
+	 * 根据部门查询用户.
+	 * @param userDepId userDepId部门Id
+	 * @return 结果
+	 */
+	public Map<String, Object> selectUserByDepId(Integer userDepId);
+	
+	/**
 	 * 添加.
 	 * @param user user对象
 	 * @return 结果

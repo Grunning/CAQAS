@@ -19,10 +19,16 @@ public class IQuestionService implements QuestionService {
 	private QuestionMapper questionMapper;
 	
 	public Map<String, Object> selectQuestionsByUserId(Integer quesUserId, Integer page, 
-			Integer pageNum, Integer solved) {
+			Integer pageNum, Integer solved, Integer role) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result", questionMapper.selectQuestionsByUserId(quesUserId, 
-				(page - 1)*pageNum, pageNum, solved));
+				(page - 1)*pageNum, pageNum, solved, role));
+		return map;
+	}
+	
+	public Map<String, Object> selectQuestionsByAdmin(Integer page, Integer pageNum, Integer role) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", questionMapper.selectQuestionsByAdmin((page - 1)*pageNum, pageNum, role));
 		return map;
 	}
 

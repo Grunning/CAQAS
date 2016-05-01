@@ -19,9 +19,9 @@ public class ICategoryService implements CategoryService {
 	@Resource
 	private CategoryMapper categoryMapper;
 	
-	public Map<String, Object> selectAllCategories(Integer page, Integer pageNum) {
+	public Map<String, Object> selectAllCategories(Integer page, Integer pageNum, Integer role, Integer userId) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("result", categoryMapper.selectAllCategories((page - 1)*pageNum, pageNum));
+		map.put("result", categoryMapper.selectAllCategories((page - 1)*pageNum, pageNum, role, userId));
 		return map;
 	}
 
@@ -40,6 +40,16 @@ public class ICategoryService implements CategoryService {
 			list.add(s);
 		}
 		return categoryMapper.deleteBatchCategory(list);
+	}
+
+	public Map<String, Object> selectAllCates(Integer cateUserId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", categoryMapper.selectAllCates(cateUserId));
+		return map;
+	}
+
+	public Category selectByCateName(String cateName) {
+		return categoryMapper.selectByCateName(cateName);
 	}
 
 }

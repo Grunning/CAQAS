@@ -29,6 +29,41 @@
   		ques_create_time as "quesCreateTime",
   		answ_title as "answTitle",
   		answ_content as "answContent",
+  		answ_time as "answTime",
+  		cate_name as "cateName"
+  	from
+  		question
+  	left join
+  		answer
+  	on
+  		ques_answ_id = answ_id
+  	left join
+  		category
+  	on 
+  		ques_cate_id = cate_id
+  	where
+  		1 = 1
+  	and 
+  		ques_user_id = #{quesUserId,jdbcType=INTEGER}
+  	<if test="solved == 1">
+  	and answ_content is not null
+  	</if>
+  	<if test="solved == 0">
+  	and answ_content is null
+  	</if>
+  	order by ques_create_time desc
+  	limit #{page,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 超级管理员所有问题 -->
+  <select id="selectQuestionsByAdmin" resultType="com.CAQAS.model.QuestionsResultModel">
+  	select
+  		ques_id as "quesId",
+  		ques_title as "quesTitle",
+  		search_num as "searchNum",
+  		ques_create_time as "quesCreateTime",
+  		answ_title as "answTitle",
+  		answ_content as "answContent",
   		answ_time as "answTime"
   	from
   		question
@@ -38,13 +73,8 @@
   		ques_answ_id = answ_id
   	where
   		1 = 1
-  	and
-  		ques_user_id = #{quesUserId,jdbcType=INTEGER}
-  	<if test="solved == 1">
-  	and answ_content is not null
-  	</if>
-  	<if test="solved == 0">
-  	and answ_content is null
+  	<if test="role != null and role == 0">
+  	and ques_user_id is null
   	</if>
   	order by ques_create_time desc
   	limit #{page,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}

@@ -43,4 +43,10 @@ public class IUserService implements UserService {
 		return userMapper.deleteByPrimaryKey(userId);
 	}
 
+	public Map<String, Object> selectUserByDepId(Integer userDepId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", userMapper.selectUserByDepId(userDepId));
+		return map;
+	}
+
 }

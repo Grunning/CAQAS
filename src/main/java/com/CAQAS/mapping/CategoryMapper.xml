@@ -4,16 +4,32 @@
   <resultMap id="BaseResultMap" type="com.CAQAS.pojo.Category" >
     <id column="cate_id" property="cateId" jdbcType="INTEGER" />
     <result column="cate_name" property="cateName" jdbcType="VARCHAR" />
+    <result column="cate_user_id" property="cateUserId" jdbcType="INTEGER"/>
   </resultMap>
   <sql id="Base_Column_List" >
-    cate_id, cate_name
+    cate_id, cate_name, cate_user_id
   </sql>
   <!-- 查询所有类别 -->
   <select id="selectAllCategories" resultMap="BaseResultMap">
   	select
   	<include refid="Base_Column_List" />
   	from category
+  	<if test="role != null and role != '' and role == 1">
+  	where cate_user_id = #{userId, jdbcType=INTEGER}
+  	</if>
   	limit #{page,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllCates" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from category
+  	where cate_user_id = #{cateUserId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByCateName" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from category
+  	where cate_name = #{cateName,jdbcType=VARCHAR}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -47,6 +63,9 @@
       <if test="cateName != null" >
         cate_name,
       </if>
+      <if test="cateUserId != null" >
+        cate_user_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="cateId != null" >
@@ -54,6 +73,9 @@
       </if>
       <if test="cateName != null" >
         #{cateName,jdbcType=VARCHAR},
+      </if>
+      <if test="cateUserId != null" >
+        #{cateUserId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

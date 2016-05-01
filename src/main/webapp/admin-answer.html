@@ -22,6 +22,7 @@
 <script type="text/javascript" charset="utf-8" src="lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/admin-answer.js"></script>
 <script type="text/javascript" src="js/common-js/ajax-request.js"></script>
+<script type="text/javascript" src="js/common-js/common.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
 
 </head>
@@ -30,13 +31,13 @@
 
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="/CAQAS/admin-home.html">Home</a>
+			<div id="nav-content" class="navbar-header">
+				<!-- <a class="navbar-brand" href="/CAQAS/admin-home.html">Home</a>
 				<a class="navbar-brand" href="/CAQAS/admin-question.html">Question</a>
 				<a class="navbar-brand" href="/CAQAS/admin-answer.html">Answer</a>
 				<a class="navbar-brand" href="/CAQAS/admin-department.html">Department</a>
 				<a class="navbar-brand" href="/CAQAS/admin-category.html">Category</a>
-				<a class="navbar-brand" href="/CAQAS/admin-user.html">User</a>
+				<a class="navbar-brand" href="/CAQAS/admin-user.html">User</a> -->
 			</div>
 			<!-- <div id="navbar" class="navbar-collapse collapse">
 				<form class="navbar-form navbar-right">
@@ -51,7 +52,8 @@
 			</div> -->
 			<div id="navbar" class="navbar-collapse collapse">
 				<div class="navbar-form navbar-right">
-					<button class="btn btn-success" onclick="javascript:logout();">logout</button>
+					<!-- <button class="btn btn-success" onclick="javascript:logout();">logout</button> -->
+					<p class="logout" onclick="javascript:logout();">logout</p>
 				</div>
 				<div id="userName"></div>
 			</div>
@@ -68,8 +70,7 @@
 				<ol class="breadcrumb">
 					<li>导航：</li>
 					<li><a href="#">Home</a></li>
-					<li><a href="#">2013</a></li>
-					<li class="active">十一月</li>
+					<li class="active">Answer</li>
 				</ol>
 			</div>
 			<p>问题标题：</p>
@@ -117,8 +118,7 @@
 				var newURL = array[0] + "/CAQAS/login.html";
 				self.location = newURL;				
 			} else {
-				$("#userName").html("<div class='navbar-form navbar-right'>"
-						+"<p style='color:white;margin-top:4px;'>用户名："+ result.userName +"</p></div>");
+				putNavContent();
 				var url = window.location.href;
 				if (url.indexOf("?") != -1) {
 					var arr = [];

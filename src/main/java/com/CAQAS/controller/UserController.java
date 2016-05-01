@@ -98,6 +98,18 @@ public class UserController {
 	}
 	
 	/**
+	 * 根据部门Id查询用户.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/selectUserByDepId")
+	public Map<String, Object> selectUserByDepId(HttpServletRequest request) {
+		Integer userDepId = Integer.parseInt(request.getParameter("userDepId"));
+		return userService.selectUserByDepId(userDepId);
+	}
+	
+	/**
 	 * 管理员添加普通用户.
 	 * @param request request对象
 	 * @return 结果

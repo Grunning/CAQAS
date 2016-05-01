@@ -14,7 +14,16 @@ public interface QuestionService {
 	 * @param solved 问题是否解决
 	 * @return 结果
 	 */
-	Map<String, Object> selectQuestionsByUserId(Integer quesUserId, Integer page, Integer pageNum, Integer solved);
+	Map<String, Object> selectQuestionsByUserId(Integer quesUserId, Integer page, 
+			Integer pageNum, Integer solved, Integer role);
+	
+	/**
+	 * 超级管理员问题查询.
+	 * @param page 当前页
+	 * @param pageNum 每页条数
+	 * @return 结果
+	 */
+	Map<String, Object> selectQuestionsByAdmin(Integer page, Integer pageNum, Integer role);
 	
 	/**
 	 * 删除问题.
