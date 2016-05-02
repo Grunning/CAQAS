@@ -1,14 +1,14 @@
 function putNavContent() {
 	var map = ajax("POST", "getUserSession", {}, "json");
 	if (map.userRole == 0) {
-		$("#nav-content").html("<a class='navbar-brand' href='/CAQAS/admin-home.html'>Home</a> " +
+		$("#nav-content").html("<a class='navbar-brand' href='/CAQAS/answer-search.html'>Home</a> " +
 				"<a class='navbar-brand' href='/CAQAS/admin-question.html'>Question</a>" +
 				"<a class='navbar-brand' href='/CAQAS/admin-answer.html'>Answer</a> " +
 				"<a class='navbar-brand' href='/CAQAS/admin-department.html'>Department</a>" +
 				"<a class='navbar-brand' href='/CAQAS/admin-category.html'>Category</a>" +
 		"<a class='navbar-brand' href='/CAQAS/admin-user.html'>User</a>");
 	} else {
-		$("#nav-content").html("<a class='navbar-brand' href='/CAQAS/admin-home.html'>Home</a> " +
+		$("#nav-content").html("<a class='navbar-brand' href='/CAQAS/answer-search.html'>Home</a> " +
 				"<a class='navbar-brand' href='/CAQAS/admin-question.html'>Question</a>" +
 				"<a class='navbar-brand' href='/CAQAS/admin-answer.html'>Answer</a> " +
 				"<a class='navbar-brand' href='/CAQAS/admin-category.html'>Category</a>");

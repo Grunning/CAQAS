@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>自动回答页面</title>
+
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/jumbotron.css" rel="stylesheet">
+<link href="css/tag-cloud.css" rel="stylesheet">
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/common-js/ajax-request.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript" src="js/answer-search.js"></script>
+<script type="text/javascript" src="js/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/tag-cloud.js"></script>
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div id="nav-content" class="navbar-header">
+					<a class="navbar-brand" href="/CAQAS/answer-search.html">Answer Search</a>
+			</div>
+			<div class="navbar-form navbar-left">
+    				<div class="input-group">
+      					<input type="text" class="form-control" style="width:400px;" placeholder="输入要搜索的内容">
+      					<span class="input-group-btn">
+        					<button class="btn btn-default" type="button">Go!</button>
+      					</span>
+    				</div><!-- /input-group -->
+  			</div>
+  			<div id="navbar" class="navbar-collapse collapse">
+				<div class="navbar-form navbar-right">
+					<p class="logout" onclick="javascript:signIn();">Sign in</p>
+				</div>
+				<div id="userName"></div>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="jumbotron">
+		<div class="container">
+		<div class="row" style="margin-top:20px;">
+			<div class="col-lg-9">
+				<ol class="breadcrumb">
+					<li>一个月内最常问前五个问题：</li>
+				</ol>
+				<div class="panel panel-default panel-body">
+					<a data-toggle="collapse" data-parent="#accordion" 
+          href="#collapseTwo">1、Basic panel
+						example技术的jfk大家看法了道具收费的的jfk来说接口规范的数据库管理的方式看风景开好的风口浪尖的少了几分独立思考感觉</a>
+					<div id="collapseTwo" class="panel-collapse collapse in">
+						<div class="panel-body">
+							<hr>
+							       学校鼓励学有余力的同学拓宽专业面，适度文、理、工渗透，修读辅修专业。凡第三学期或第四学期以前所修课程平均学分绩点大于2.0的同学均可修读。辅修专业由开设学院负责制订指导性教学计划，并公布开设课程及学期，供全校其它专业同学选择。修读辅修专业由本人提出申请，经原所在学院和接受学院同意后，接受学院到教务处教务科备案，并指导同学在网上选课。辅修专业开设学院负责修读同学的教学管理及成绩审核工作，完成辅修专业教学计划的同学，经考核合格，可发给辅修专业毕业证书。
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default panel-body">
+					<a data-toggle="collapse" data-parent="#accordion" 
+          href="#collapseOne">2、Basic panel example</a>
+					<div id="collapseOne" class="panel-collapse collapse">
+				      <div class="panel-body">
+						<hr>
+				        Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
+				        cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
+				        vice lomo.
+				      </div>
+    				</div>
+				</div>
+			</div>
+			<div class="col-lg-3" style="margin-top:36px;">
+				<div id="tagscloud" class="panel panel-default panel-body">
+					<ol class="breadcrumb">
+						<li>问题分类云标签</li>
+					</ol>
+					<a href="http://sc.chinaz.com/" class="tagc1">js特效代码</a>
+					<a href="http://sc.chinaz.com/" class="tagc2">网页小图标</a>
+					<a href="http://sc.chinaz.com/" class="tagc5">jquery特效代码</a>
+					<a href="http://sc.chinaz.com/" class="tagc2">js特效代码</a>
+				    <a href="http://sc.chinaz.com/" class="tagc2" >网页小图标</a>
+					<a href="http://sc.chinaz.com/" class="tagc1" >网站常用代码</a>
+					<a href="http://sc.chinaz.com/" class="tagc2">js特效代码</a>
+					<a href="http://sc.chinaz.com/" class="tagc5">jquery特效代码</a>
+					<a href="http://sc.chinaz.com/" class="tagc2">网页小图标</a>
+					<a href="http://sc.chinaz.com/" class="tagc2">代码笔记</a>
+					<a href="http://sc.chinaz.com/" class="tagc5">js特效代码表</a>
+					<a href="http://sc.chinaz.com/" class="tagc2">jquery特效代码表</a>
+					<a href="http://sc.chinaz.com/" class="tagc1">js特效代码</a>
+					<a href="http://sc.chinaz.com/" class="tagc2">网页小图标</a>
+					<a href="http://sc.chinaz.com/" class="tagc5">jquery特效代码</a>
+					<a href="http://sc.chinaz.com/" class="tagc2">js特效代码</a>
+					<a href="http://sc.chinaz.com/" class="tagc2" >网页小图标</a>
+					<a href="http://sc.chinaz.com/" class="tagc1" >网站常用代码</a>
+					<a href="http://sc.chinaz.com/" class="tagc2">js特效代码</a>
+					<a href="http://sc.chinaz.com/" class="tagc5">jquery特效代码</a>
+					<a href="http://sc.chinaz.com/" class="tagc2">网页小图标</a>
+					<a href="http://sc.chinaz.com/" class="tagc2">相册代码</a>
+					<a href="http://sc.chinaz.com/" class="tagc5">js特效代码表</a>
+					<a href="http://sc.chinaz.com/" class="tagc2">jquery特效代码表</a>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<hr>
+	<footer>
+		<p>&copy; Company 2016</p>
+	</footer>
+
+	<script type="text/javascript">
+	</script>
+</body>
+</html>
