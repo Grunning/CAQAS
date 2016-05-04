@@ -80,6 +80,68 @@
   	limit #{page,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
   </select>
   
+  <!-- answer-search页面初始化查询 -->
+  <select id="selectQuestionsBySearchNum" resultType="com.CAQAS.model.QuestionsResultModel">
+  	select
+  		ques_id as "quesId",
+  		ques_title as "quesTitle",
+  		search_num as "searchNum",
+  		ques_create_time as "quesCreateTime",
+  		answ_title as "answTitle",
+  		answ_content as "answContent",
+  		answ_time as "answTime"
+  	from
+  		question
+  	left join
+  		answer
+  	on
+  		ques_answ_id = answ_id
+  	where 1 = 1
+  	<if test="quesCateId != null">
+  	and ques_cate_id = #{quesCateId,jdbcType=INTEGER}
+  	</if>
+  	and answ_content is not null
+  	order by search_num desc
+  	limit 5
+  </select>
+  
+  <!-- 先模糊查询 -->
+  <select id="selectVagueQuestionsSearch" resultType="com.CAQAS.model.QuestionsResultModel">
+  	SELECT
+	ques_id AS "quesId",
+	ques_title AS "quesTitle",
+	search_num AS "searchNum",
+	ques_create_time AS "quesCreateTime",
+	answ_title AS "answTitle",
+	answ_content AS "answContent",
+	answ_time AS "answTime"
+	FROM
+	question
+	LEFT JOIN answer ON ques_answ_id = answ_id
+	WHERE
+	1 = 1
+	AND answ_content IS NOT NULL
+	<if test="searchTitle != null">
+	AND ques_title LIKE CONCAT('%', #{searchTitle,jdbcType=VARCHAR}, '%')
+	OR answ_content LIKE CONCAT('%', #{searchTitle,jdbcType=VARCHAR}, '%')
+	</if>
+	ORDER BY search_num DESC
+	LIMIT #{page,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 标签云问题类别查询 -->
+  <select id="selectCategoryToTagCloud" resultType="com.CAQAS.model.TagCloudCategoryResultModel">
+  	select
+  		cate_id as "cateId",
+  		cate_name as "cateName",
+  		count(ques_cate_id) as "questionNum"
+  	from question,category
+  	where ques_cate_id = cate_id
+  	and ques_answ_id is not null
+  	group by cate_name
+  	order by count(ques_cate_id) desc
+  </select>
+  
   <!-- 根据问题Id查询标题和内容 -->
   <select id="selectByQuesId" resultType="com.CAQAS.model.QuestionsResultModel" parameterType="java.lang.Integer">
   	select
@@ -159,6 +221,15 @@
       </if>
     </trim>
   </insert>
+  <!-- 批量更新访问量 -->
+  <update id="updateBatchQuestionsSearchNum" parameterType="java.util.List">
+  	update question
+  	set search_num = search_num + 1
+  	where ques_id in
+  	<foreach item="quesId" collection="list" open="(" separator="," close=")">
+  	#{quesId,jdbcType=INTEGER}
+  	</foreach>
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.CAQAS.pojo.Question" >
     update question
     <set >

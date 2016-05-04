@@ -231,6 +231,8 @@ function getNextPage() {
 function getPreviousPage() {
 	if (currentPage > 1) {
 		currentPage --;
+		selectAllQuestions();
+	} else {
+		alert("已到第一页！");
 	}
-	selectAllQuestions();
 }

@@ -31,9 +31,9 @@
 			</div>
 			<div class="navbar-form navbar-left">
     				<div class="input-group">
-      					<input type="text" class="form-control" style="width:400px;" placeholder="输入要搜索的内容">
+      					<input type="text" id="searchTitle" class="form-control" style="width:400px;" placeholder="输入要搜索的内容">
       					<span class="input-group-btn">
-        					<button class="btn btn-default" type="button">Go!</button>
+        					<button class="btn btn-default" type="button" onclick="javascript:btnSearch();">Go</button>
       					</span>
     				</div><!-- /input-group -->
   			</div>
@@ -50,7 +50,8 @@
 		<div class="container">
 		<div class="row" style="margin-top:20px;">
 			<div class="col-lg-9">
-				<ol class="breadcrumb">
+			<div id="usualQuestions"></div>
+				<!-- <ol class="breadcrumb">
 					<li>一个月内最常问前五个问题：</li>
 				</ol>
 				<div class="panel panel-default panel-body">
@@ -75,6 +76,9 @@
 				        vice lomo.
 				      </div>
     				</div>
+				</div> -->
+				<div id="btnGetMore" align="center">
+					<!-- <button type="button" class="btn btn-primary" onclick="javascript:;">GET MORE</button> -->
 				</div>
 			</div>
 			<div class="col-lg-3" style="margin-top:36px;">
@@ -82,30 +86,8 @@
 					<ol class="breadcrumb">
 						<li>问题分类云标签</li>
 					</ol>
-					<a href="http://sc.chinaz.com/" class="tagc1">js特效代码</a>
-					<a href="http://sc.chinaz.com/" class="tagc2">网页小图标</a>
-					<a href="http://sc.chinaz.com/" class="tagc5">jquery特效代码</a>
-					<a href="http://sc.chinaz.com/" class="tagc2">js特效代码</a>
-				    <a href="http://sc.chinaz.com/" class="tagc2" >网页小图标</a>
-					<a href="http://sc.chinaz.com/" class="tagc1" >网站常用代码</a>
-					<a href="http://sc.chinaz.com/" class="tagc2">js特效代码</a>
-					<a href="http://sc.chinaz.com/" class="tagc5">jquery特效代码</a>
-					<a href="http://sc.chinaz.com/" class="tagc2">网页小图标</a>
-					<a href="http://sc.chinaz.com/" class="tagc2">代码笔记</a>
-					<a href="http://sc.chinaz.com/" class="tagc5">js特效代码表</a>
-					<a href="http://sc.chinaz.com/" class="tagc2">jquery特效代码表</a>
-					<a href="http://sc.chinaz.com/" class="tagc1">js特效代码</a>
-					<a href="http://sc.chinaz.com/" class="tagc2">网页小图标</a>
-					<a href="http://sc.chinaz.com/" class="tagc5">jquery特效代码</a>
-					<a href="http://sc.chinaz.com/" class="tagc2">js特效代码</a>
-					<a href="http://sc.chinaz.com/" class="tagc2" >网页小图标</a>
-					<a href="http://sc.chinaz.com/" class="tagc1" >网站常用代码</a>
-					<a href="http://sc.chinaz.com/" class="tagc2">js特效代码</a>
-					<a href="http://sc.chinaz.com/" class="tagc5">jquery特效代码</a>
-					<a href="http://sc.chinaz.com/" class="tagc2">网页小图标</a>
-					<a href="http://sc.chinaz.com/" class="tagc2">相册代码</a>
-					<a href="http://sc.chinaz.com/" class="tagc5">js特效代码表</a>
-					<a href="http://sc.chinaz.com/" class="tagc2">jquery特效代码表</a>
+					<div id="aTag">
+					</div>
 				</div>
 			</div>
 		</div>
@@ -117,6 +99,16 @@
 	</footer>
 
 	<script type="text/javascript">
+		$(function() {
+			$('#searchTitle').bind('keypress',function(event){
+	            if(event.keyCode == "13") {
+	            	btnSearch();
+	            }
+	        });
+			getUrl();
+			selectUsualQuestions();
+			aTagCloud();
+		});
 	</script>
 </body>
 </html>

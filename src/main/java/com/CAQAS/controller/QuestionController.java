@@ -55,6 +55,46 @@ public class QuestionController {
 	}
 	
 	/**
+	 * 模糊查询.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/selectVagueQuestionsSearch")
+	public Map<String, Object> selectVagueQuestionsSearch(HttpServletRequest request) {
+		String searchTitle = request.getParameter("searchTitle");
+		Integer page = Integer.parseInt(request.getParameter("page"));
+		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		return questionService.selectVagueQuestionsSearch(searchTitle, (page - 1)*pageNum, pageNum);
+	}
+	
+	/**
+	 * answer-search问题常问问题初始化.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/selectQuestionsBySearchNum")
+	public Map<String, Object> selectQuestionsBySearchNum(HttpServletRequest request) {
+		Integer quesCateId = null;
+		if (request.getParameter("quesCateId") != null) {
+			quesCateId = Integer.parseInt(request.getParameter("quesCateId"));
+		}
+		return questionService.selectQuestionsBySearchNum(quesCateId);
+	}
+	
+	/**
+	 * 问题类别对应问题数量.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/selectCategoryToTagCloud")
+	public Map<String, Object> selectCategoryToTagCloud(HttpServletRequest request) {
+		return questionService.selectCategoryToTagCloud();
+	}
+	
+	/**
 	 * 根据问题Id删除相应问题.
 	 * @param request request对象
 	 * @return 结果

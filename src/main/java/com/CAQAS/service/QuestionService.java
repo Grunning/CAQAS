@@ -26,6 +26,27 @@ public interface QuestionService {
 	Map<String, Object> selectQuestionsByAdmin(Integer page, Integer pageNum, Integer role);
 	
 	/**
+	 * 模糊查询.
+	 * @param searchTitle searchTitle查询标题
+	 * @param page page当前页
+	 * @param pageNum pageNum每页条数
+	 * @return 结果
+	 */
+	Map<String, Object> selectVagueQuestionsSearch(String searchTitle, Integer page, Integer pageNum);
+	
+	/**
+	 * answer-search页面问题初始化.
+	 * @return 结果
+	 */
+	Map<String, Object> selectQuestionsBySearchNum(Integer quesCateId);
+	
+	/**
+	 * 问题类别下的问题数.
+	 * @return 结果
+	 */
+	Map<String, Object> selectCategoryToTagCloud();
+	
+	/**
 	 * 删除问题.
 	 * @param quesId 问题Id
 	 * @return 结果

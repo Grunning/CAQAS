@@ -176,5 +176,7 @@ function previousPage() {
 		removeCheckBoxColumn();
 		selectAllCategory();
 		checkBoxAttribute();
+	} else {
+		alert("已到第一页！");
 	}
 }

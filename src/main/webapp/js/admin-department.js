@@ -178,5 +178,7 @@ function previousPage() {
 		}
 		selectAllDeps();
 		checkBoxAttribute();
+	} else {
+		alert("已到第一页！");
 	}
 }

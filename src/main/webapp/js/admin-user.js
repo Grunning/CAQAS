@@ -52,13 +52,17 @@ function selectAllUser() {
 	map = ajax("POST", "selectAllUsers", data, "json");
 	var html = "";
 	var num = 0;
-	$.each(map.result,function(i,item){
-		num ++;
-		html += "<tr id='" + item.userId + "'><td>" + num + "</td><td>" 
-		+ item.userName + "</td><td>" + item.userMail + "</td><td>" + item.userDepName 
-		+ "</td></tr>";
-	});
-	$("#userTable").html(html);
+	/*if (currentPage != 1 && map.result.length == 0) {
+		alert("已到最后一页！");
+	} else {*/
+		$.each(map.result,function(i,item){
+			num ++;
+			html += "<tr id='" + item.userId + "'><td>" + num + "</td><td>" 
+			+ item.userName + "</td><td>" + item.userMail + "</td><td>" + item.userDepName 
+			+ "</td></tr>";
+		});
+		$("#userTable").html(html);
+//	}
 }
 
 //部门列表初始化
@@ -178,7 +182,9 @@ function nextPage() {
 		}
 	}
 	selectAllUser();
-	checkBoxAttribute();
+//	if (map.result.length != 0) {
+		checkBoxAttribute();
+//	}
 }
 
 //上一页
@@ -193,5 +199,7 @@ function previousPage() {
 		}
 		selectAllUser();
 		checkBoxAttribute();
+	} else {
+		alert("已到第一页！");
 	}
 }
