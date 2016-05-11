@@ -200,7 +200,7 @@ function putAnswer(obj) {
 	var array = [];
 	var url = window.location.href;
 	array = url.split("/CAQAS/");
-	var newURL = array[0] + "/CAQAS/admin-answer.html?"+ "id=" + obj.value;
+	var newURL = array[0] + "/CAQAS/admin-answer.html?"+ "quesId=" + obj.value;
 	self.location = newURL;
 }
 

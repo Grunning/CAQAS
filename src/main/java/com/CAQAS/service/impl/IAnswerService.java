@@ -18,4 +18,8 @@ public class IAnswerService implements AnswerService {
 		return answerMapper.insertSelective(answer);
 	}
 
+	public int updateAnswer(Answer answer) {
+		return answerMapper.updateByPrimaryKeySelective(answer);
+	}
+
 }

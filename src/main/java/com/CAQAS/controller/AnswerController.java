@@ -29,7 +29,7 @@ public class AnswerController {
 	private QuestionMapper questionMapper;
 	
 	/**
-	 * 修改或回答问题的答案.
+	 * 回答问题的答案.
 	 * @param request request对象
 	 * @return 结果
 	 */
@@ -49,6 +49,35 @@ public class AnswerController {
 		question.setQuesAnswId(answer.getAnswId());
 		question.setQuesCreateTime(new Date());
 		questionService.updateByPrimaryKeySelective(question);
+		return result;
+	}
+	
+	/**
+	 * 修改问题标题和回答内容.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/updateAnswerAndQuestion")
+	public int updateAnswerAndQuestion(HttpServletRequest request) {
+		Integer quesId = Integer.parseInt(request.getParameter("quesId"));
+		Integer answId = Integer.parseInt(request.getParameter("answId"));
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		Answer answer = new Answer();
+		answer.setAnswId(answId);
+		answer.setAnswContent(content);
+		answer.setAnswTime(new Date());
+		int answResult = answerService.updateAnswer(answer);
+		Question question = new Question();
+		question.setQuesId(quesId);
+		question.setQuesTitle(title);
+		question.setQuesCreateTime(new Date());
+		int quesResult = questionService.updateByPrimaryKeySelective(question);
+		int result = 0;
+		if (answResult == 1 && quesResult == 1) {
+			result = 1;
+		}
 		return result;
 	}
 	

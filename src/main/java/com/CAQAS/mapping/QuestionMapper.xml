@@ -27,6 +27,7 @@
   		ques_title as "quesTitle",
   		search_num as "searchNum",
   		ques_create_time as "quesCreateTime",
+  		answ_id as "answId",
   		answ_title as "answTitle",
   		answ_content as "answContent",
   		answ_time as "answTime",
@@ -166,6 +167,7 @@
   	select
   		ques_id as "quesId",
   		ques_title as "quesTitle",
+  		answ_id as "answId",
   		answ_content as "answContent"
   	from
   		question

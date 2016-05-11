@@ -5,6 +5,7 @@ public class QuestionsResultModel {
 	private String quesTitle;//问题标题
 	private Integer searchNum;//查询次数
 	private String quesCreateTime;//问题创建时间
+	private Integer answId;
 	private String answTitle;
 	private String answContent;//答复内容
 	private String answTime;//答复时间
@@ -28,6 +29,12 @@ public class QuestionsResultModel {
 	}
 	public void setSearchNum(Integer searchNum) {
 		this.searchNum = searchNum;
+	}
+	public Integer getAnswId() {
+		return answId;
+	}
+	public void setAnswId(Integer answId) {
+		this.answId = answId;
 	}
 	public String getQuesCreateTime() {
 		return quesCreateTime;
