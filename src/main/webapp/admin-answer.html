@@ -82,9 +82,9 @@
 			<script id="editor" type="text/plain" style="height: 500px;"></script>
 
 			<div style="text-align: center; margin-top: 25px;">
-				<button type="button" class="btn btn-primary" data-toggle="button" onclick="insertAnswer();">
+				<button type="button" class="btn btn-primary" data-toggle="button" onclick="javascript:insertAnswer();">
 					SUBMIT</button>
-					<button type="button" class="btn btn-primary" data-toggle="button" onclick="getTitle();">
+					<button type="button" class="btn btn-primary" data-toggle="button" onclick="javascript:getTitle();">
 					GETTITLE</button>
 			</div>
 
@@ -127,6 +127,10 @@
 					var dataSearch = {"quesId":id};
 					var map = ajax("POST", "selectByQuesId", dataSearch, "json");
 					document.getElementById("title").value = map.quesTitle;
+					var ue = UE.getEditor('editor');
+					ue.addListener("ready", function () {
+						ue.setContent(map.answContent, false);
+					});
 				}
 			}
 		}

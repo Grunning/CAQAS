@@ -43,6 +43,7 @@ function selectUsualQuestions() {
 
 //问题提问
 function btnSearch() {
+	currentPage = 1;
 	var searchTitle = document.getElementById("searchTitle").value;
 	if (searchTitle != null && searchTitle != "") {
 		var data = {"searchTitle":searchTitle, "page":currentPage, "pageNum":pageNum};
@@ -63,6 +64,9 @@ function btnSearch() {
 				+ num +"、" + item.quesTitle + "</a><div id='" + item.quesId + "' class='panel-collapse collapse'><div class='panel-body'><hr>" + item.answContent + "</div><a data-toggle='collapse' data-parent='#accordion' href='#" + item.quesId + "' class='navbar-right' style='margin-right:22px;'>收起 &#8593;</a></div></div>";
 			}
 		});
+		if (map.result.length == 0) {
+			usualQuestionsHtml += "<div class='panel panel-default panel-body'><div class='panel-body'><hr><p style='font-size:30px;color:red;'>Sorry，未找到相应问题的答案，该问题已被录入问题库，以等待管理人员回答。</p><hr></div></div>";
+		}
 		$("#usualQuestions").html(usualQuestionsHtml);
 		var btnHtml = "<button type='button' class='btn btn-primary' onclick='javascript:getMoreAnswer(" + num + ");'>GET MORE</button>";
 		$("#btnGetMore").html(btnHtml);

@@ -129,6 +129,25 @@
 	LIMIT #{page,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
   </select>
   
+  <!-- 相似度查询计算 -->
+  <select id="selectSearchSimilarity" resultType="com.CAQAS.model.QuestionsResultModel">
+  	SELECT
+	ques_id AS "quesId",
+	ques_title AS "quesTitle",
+	search_num AS "searchNum",
+	ques_create_time AS "quesCreateTime",
+	answ_title AS "answTitle",
+	answ_content AS "answContent",
+	answ_time AS "answTime"
+	FROM
+	question
+	LEFT JOIN answer ON ques_answ_id = answ_id
+	WHERE
+	1 = 1
+	AND answ_content IS NOT NULL
+	ORDER BY search_num DESC
+  </select>
+  
   <!-- 标签云问题类别查询 -->
   <select id="selectCategoryToTagCloud" resultType="com.CAQAS.model.TagCloudCategoryResultModel">
   	select

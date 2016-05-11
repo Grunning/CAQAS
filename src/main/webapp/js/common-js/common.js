@@ -26,8 +26,8 @@ function putNavContent() {
 	}
 	
 	if (map.userRole == 1) {
-		$("#btnByRole").html("<button class='btn btn-default' onclick='javascript:selectAll();'>&nbsp;全&nbsp;部&nbsp;</button>" +
-				"<button class='btn btn-primary' onclick='javascript:selectIsSolved();'>已解决</button>" +
-				"<button class='btn btn-warning' onclick='javascript:selectNotSolved();'>待解决</button>");
+		$("#btnByRole").html("<button class='btn btn-default btn-sm' style='margin-right:5px;' onclick='javascript:selectAll();'>&nbsp;全&nbsp;部&nbsp;</button>" +
+				"<button class='btn btn-primary btn-sm' style='margin-right:5px;' onclick='javascript:selectIsSolved();'>已解决</button>" +
+				"<button class='btn btn-warning btn-sm' onclick='javascript:selectNotSolved();'>待解决</button>");
 	}
 }

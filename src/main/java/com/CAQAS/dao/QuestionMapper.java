@@ -30,6 +30,8 @@ public interface QuestionMapper {
     
     List<QuestionsResultModel> selectVagueQuestionsSearch(@Param("searchTitle")String searchTitle, @Param("page")Integer page, @Param("pageNum")Integer pageNum);
     
+    List<QuestionsResultModel> selectSearchSimilarity();
+    
     List<TagCloudCategoryResultModel> selectCategoryToTagCloud();
     
     int updateBatchQuestionsSearchNum(List<Integer> list);

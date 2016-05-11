@@ -9,6 +9,7 @@ public class QuestionsResultModel {
 	private String answContent;//答复内容
 	private String answTime;//答复时间
 	private String cateName;//问题类别
+	private Double similarity;//相似度
 	
 	public Integer getQuesId() {
 		return quesId;
@@ -57,6 +58,12 @@ public class QuestionsResultModel {
 	}
 	public void setCateName(String cateName) {
 		this.cateName = cateName;
+	}
+	public Double getSimilarity() {
+		return similarity;
+	}
+	public void setSimilarity(Double similarity) {
+		this.similarity = similarity;
 	}
 	
 }
