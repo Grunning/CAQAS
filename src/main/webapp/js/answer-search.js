@@ -26,7 +26,7 @@ function selectUsualQuestions() {
 	var map = ajax("POST", "selectQuestionsBySearchNum", {"quesCateId":id}, "json");
 	var html = "";
 	var num = 0;
-	html += "<ol class='breadcrumb'><li>最常问前五个问题及答案（点击问题标题展开答案）：</li></ol>";
+	html += "<ol class='breadcrumb'><li><span class='word'>最常问前五个问题及答案（点击问题标题展开答案）：</span></li></ol>";
 	$.each(map.result,function(i, item){
 		if (i == 0) {
 			num ++;
@@ -48,14 +48,14 @@ function btnSearch() {
 	if (searchTitle != null && searchTitle != "") {
 		var data = {"searchTitle":searchTitle, "page":currentPage, "pageNum":pageNum};
 		var map = ajax("POST", "selectVagueQuestionsSearch", data, "json");
-		var usualQuestionsHtml = "<ol class='breadcrumb'><li>推荐答案：</li></ol>";
+		var usualQuestionsHtml = "<ol class='breadcrumb'><li><span class='more'>推荐答案：</span></li></ol>";
 		var num = 0;
 		$.each(map.result, function(i,item){
 			if (i == 0) {
 				usualQuestionsHtml += "<div class='panel panel-default panel-body'><div class='panel-body'><hr>" + item.answContent + "<hr></div></div>";
 			} else if (i == 1) {
 				num ++;
-				usualQuestionsHtml += "<ol class='breadcrumb'><li>更多相似问题及答案：</li></ol>";
+				usualQuestionsHtml += "<ol class='breadcrumb'><li><span class='word'>更多相似问题及答案：</span></li></ol>";
 				usualQuestionsHtml += "<div class='panel panel-default panel-body'><a data-toggle='collapse' data-parent='#accordion' href='#" + item.quesId + "'>" 
 				+ num +"、" + item.quesTitle + "</a><div id='" + item.quesId + "' class='panel-collapse collapse'><div class='panel-body'><hr>" + item.answContent + "</div><a data-toggle='collapse' data-parent='#accordion' href='#" + item.quesId + "' class='navbar-right' style='margin-right:22px;'>收起 &#8593;</a></div></div>";
 			} else {
@@ -104,7 +104,16 @@ function aTagCloud() {
 	$("#aTag").html(html);
 }
 
+//页面跳转到问题页
+function returnQuestion() {
+	var array = [];
+	var url = window.location.href;
+	array = url.split("/CAQAS/");
+	var newURL = array[0] + "/CAQAS/admin-question.html";
+	self.location = newURL;
+}
+
 //生成随机数
 function randomNum() {
-	return Math.floor(Math.random()*3) + 1;
+	return Math.floor(Math.random()*18) + 1;
 }

@@ -34,6 +34,8 @@ public interface QuestionMapper {
     
     List<TagCloudCategoryResultModel> selectCategoryToTagCloud();
     
+    List<Question> selectAllQuestionsByUserId(Integer quesUserId);
+    
     int updateBatchQuestionsSearchNum(List<Integer> list);
     
     QuestionsResultModel selectByQuesId(Integer quesId);

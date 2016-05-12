@@ -38,8 +38,8 @@
     				</div><!-- /input-group -->
   			</div>
   			<div id="navbar" class="navbar-collapse collapse">
-				<div class="navbar-form navbar-right">
-					<p class="logout" onclick="javascript:signIn();">Sign in</p>
+				<div id="answerSearchNav" class="navbar-form navbar-right">
+					<!-- <p class="logout" onclick="javascript:signIn();">Sign in</p> -->
 				</div>
 				<div id="userName"></div>
 			</div>
@@ -100,6 +100,14 @@
 
 	<script type="text/javascript">
 		$(function() {
+			var result = ajax("POST", "getUserSession", {}, "json");
+			if (result == undefined) {
+				$("#answerSearchNav").html("<p class='logout' onclick='javascript:signIn();'>Sign in</p>");
+			} else {
+				$("#answerSearchNav").html("<p class='logout' onclick='javascript:logout();'>logout</p>");
+				$("#userName").html("<div class='navbar-form navbar-right'>"
+						+"<p class='logout' onclick='javascript:returnQuestion();'>用户名："+ result.userName +"</p></div>");
+			}
 			$('#searchTitle').bind('keypress',function(event){
 	            if(event.keyCode == "13") {
 	            	btnSearch();

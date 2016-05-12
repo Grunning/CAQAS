@@ -41,10 +41,24 @@ public interface QuestionService {
 	Map<String, Object> selectQuestionsBySearchNum(Integer quesCateId);
 	
 	/**
+	 * 查询当前用户下所有问题.
+	 * @param quesUserId quesUserId用户Id
+	 * @return 结果
+	 */
+	Map<String, Object> selectAllQuestionsByUserId(Integer quesUserId);
+	
+	/**
 	 * 问题类别下的问题数.
 	 * @return 结果
 	 */
 	Map<String, Object> selectCategoryToTagCloud();
+	
+	/**
+	 * 添加问题及答案.
+	 * @param question question对象
+	 * @return 结果
+	 */
+	int insertSelective(Question question);
 	
 	/**
 	 * 删除问题.

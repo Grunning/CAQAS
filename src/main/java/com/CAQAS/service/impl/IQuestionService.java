@@ -109,4 +109,14 @@ public class IQuestionService implements QuestionService {
 		return map;
 	}
 
+	public Map<String, Object> selectAllQuestionsByUserId(Integer quesUserId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("result", questionMapper.selectAllQuestionsByUserId(quesUserId));
+		return map;
+	}
+
+	public int insertSelective(Question question) {
+		return questionMapper.insertSelective(question);
+	}
+
 }

@@ -14,3 +14,11 @@ p.logout {
 p.logout:hover {
 	color:white;
 }
+
+span.word {
+	color:/* #1c7791 */#21759b;
+}
+
+span.more {
+	color:#0000FF;
+}

@@ -1,5 +1,6 @@
 package com.CAQAS.controller;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,6 +66,10 @@ public class QuestionController {
 		String searchTitle = request.getParameter("searchTitle");
 		Integer page = Integer.parseInt(request.getParameter("page"));
 		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		System.out.println("主机名：" + request.getRemoteHost());
+		System.out.println("User:" + request.getRemoteUser());
+		System.out.println("ip地址：" + request.getRemoteAddr());
+		System.out.println("端口号：" + request.getRemotePort());
 		return questionService.selectVagueQuestionsSearch(searchTitle, (page - 1)*pageNum, pageNum);
 	}
 	
@@ -119,6 +124,20 @@ public class QuestionController {
 	}
 	
 	/**
+	 * 查询当前用户下的所有问题.
+	 * @param request request对象
+	 * @param session session对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/selectAllQuestionsByUserId")
+	public Map<String, Object> selectAllQuestionsByUserId(HttpServletRequest request, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		Integer quesUserId = user.getUserId();
+		return questionService.selectAllQuestionsByUserId(quesUserId);
+	}
+	
+	/**
 	 * 管理员分配问题给用户回答.
 	 * @param request request对象
 	 * @return 结果
@@ -136,8 +155,34 @@ public class QuestionController {
 			Integer quesCateId = Integer.parseInt(request.getParameter("quesCateId"));
 			question.setQuesCateId(quesCateId);
 		}
+		if (request.getParameter("quesAnswId") != null) {
+			Integer quesAnswId = Integer.parseInt(request.getParameter("quesAnswId"));
+			question.setQuesAnswId(quesAnswId);
+		}
 		question.setQuesId(quesId);
+		question.setQuesCreateTime(new Date());
 		return questionService.updateByPrimaryKeySelective(question);
+	}
+	
+	/**
+	 * 添加问题及问题答案指向.
+	 * @param request request对象
+	 * @param session session对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/insertQuestionAndAnswerSelective")
+	public Integer insertQuestionAndAnswerSelective(HttpServletRequest request, HttpSession session) {
+		User user = (User) session.getAttribute("user");
+		Integer quesUserId = user.getUserId();
+		String quesTitle = request.getParameter("quesTitle");
+		Integer quesAnswId = Integer.parseInt(request.getParameter("quesAnswId"));
+		Question question = new Question();
+		question.setQuesTitle(quesTitle);
+		question.setQuesUserId(quesUserId);
+		question.setQuesCreateTime(new Date());
+		question.setQuesAnswId(quesAnswId);
+		return questionService.insertSelective(question);
 	}
 
 }

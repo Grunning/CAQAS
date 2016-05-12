@@ -180,6 +180,15 @@
   	and
   		ques_id = #{quesId, jdbcType=INTEGER}
   </select>
+  
+  <!-- 根据UserId查询当前用户下的所有问题 -->
+  <select id="selectAllQuestionsByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+  	select 
+    <include refid="Base_Column_List" />
+    from question
+    where ques_user_id = #{quesUserId,jdbcType=INTEGER}
+    and ques_answ_id is not null
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from question
     where ques_id = #{quesId,jdbcType=INTEGER}
