@@ -38,5 +38,9 @@ public interface QuestionMapper {
     
     int updateBatchQuestionsSearchNum(List<Integer> list);
     
+    int updateIsuseNum(Integer quesId);
+    
+    int updateNouseNum(Integer quesId);
+    
     QuestionsResultModel selectByQuesId(Integer quesId);
 }

@@ -80,4 +80,18 @@ public interface QuestionService {
 	 * @return 结果
 	 */
 	int updateByPrimaryKeySelective(Question question);
+	
+	/**
+	 * 更新有用字段.
+	 * @param quesId quesId问题Id
+	 * @return 结果
+	 */
+	int updateIsuseNum(Integer quesId, String feedIp);
+	
+	/**
+	 * 更新无用字段.
+	 * @param quesId quesId问题Id
+	 * @return 结果
+	 */
+	int updateNouseNum(Integer quesId, String feedIp);
 }

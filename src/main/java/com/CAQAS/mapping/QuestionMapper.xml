@@ -7,11 +7,13 @@
     <result column="search_num" property="searchNum" jdbcType="INTEGER" />
     <result column="ques_answ_id" property="quesAnswId" jdbcType="INTEGER" />
     <result column="ques_create_time" property="quesCreateTime" jdbcType="TIMESTAMP" />
+    <result column="ques_isuse_num" property="quesIsuseNum" jdbcType="INTEGER"/>
+    <result column="ques_nouse_num" property="quesNouseNum" jdbcType="INTEGER"/>
     <result column="ques_user_id" property="quesUserId" jdbcType="INTEGER"/>
     <result column="ques_cate_id" property="quesCateId" jdbcType="INTEGER"/>
   </resultMap>
   <sql id="Base_Column_List" >
-    ques_id, ques_title, search_num, ques_answ_id, ques_create_time, ques_user_id, ques_cate_id
+    ques_id, ques_title, search_num, ques_answ_id, ques_create_time, ques_isuse_num, ques_nouse_num, ques_user_id, ques_cate_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -113,6 +115,8 @@
 	ques_title AS "quesTitle",
 	search_num AS "searchNum",
 	ques_create_time AS "quesCreateTime",
+	ques_isuse_num AS "quesIsuseNum",
+	ques_nouse_num AS "quesNouseNum",
 	answ_title AS "answTitle",
 	answ_content AS "answContent",
 	answ_time AS "answTime"
@@ -126,7 +130,7 @@
 	AND ques_title LIKE CONCAT('%', #{searchTitle,jdbcType=VARCHAR}, '%')
 	OR answ_content LIKE CONCAT('%', #{searchTitle,jdbcType=VARCHAR}, '%')
 	</if>
-	ORDER BY search_num DESC
+	ORDER BY ques_isuse_num DESC,ques_nouse_num ASC
 	LIMIT #{page,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
   </select>
   
@@ -137,6 +141,8 @@
 	ques_title AS "quesTitle",
 	search_num AS "searchNum",
 	ques_create_time AS "quesCreateTime",
+	ques_isuse_num AS "quesIsuseNum",
+	ques_nouse_num AS "quesNouseNum",
 	answ_title AS "answTitle",
 	answ_content AS "answContent",
 	answ_time AS "answTime"
@@ -167,6 +173,8 @@
   	select
   		ques_id as "quesId",
   		ques_title as "quesTitle",
+  		ques_isuse_num as "quesIsuseNum",
+  		ques_nouse_num as "quesNouseNum",
   		answ_id as "answId",
   		answ_content as "answContent"
   	from
@@ -259,6 +267,18 @@
   	<foreach item="quesId" collection="list" open="(" separator="," close=")">
   	#{quesId,jdbcType=INTEGER}
   	</foreach>
+  </update>
+  <!-- 更新有用字段 -->
+  <update id="updateIsuseNum" parameterType="java.lang.Integer">
+  	update question
+  	set ques_isuse_num = ques_isuse_num + 1
+  	where ques_id = #{quesId,jdbcType=INTEGER}
+  </update>
+  <!-- 更新无用字段 -->
+  <update id="updateNouseNum" parameterType="java.lang.Integer">
+  	update question
+  	set ques_nouse_num = ques_nouse_num + 1
+  	where ques_id = #{quesId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.CAQAS.pojo.Question" >
     update question

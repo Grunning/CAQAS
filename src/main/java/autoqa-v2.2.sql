@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50536
 File Encoding         : 65001
 
-Date: 2016-05-12 19:39:02
+Date: 2016-05-13 17:39:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -92,7 +92,7 @@ INSERT INTO `answer` VALUES ('91', '他们说快些一首情歌雅俗共赏', '<
 INSERT INTO `answer` VALUES ('92', '啦啦啦嘻嘻', '<p><img src=\"ueditor/jsp/upload/image/20160501/1462104605935040991.jpg\" title=\"1462104605935040991.jpg\" alt=\"657ACA4F9353BB75D9892C26CCD23735.jpg\"/></p>', null, '2016-05-01 20:10:08');
 INSERT INTO `answer` VALUES ('93', '我真的不知道该怎么改了，改什么啊？！', '<p style=\"text-align: center;\"><span style=\"color: rgb(79, 129, 189);\">我只想说改个僚子啊</span></p><p style=\"text-align: center;\"><span style=\"color: rgb(79, 129, 189);\"><img src=\"ueditor/jsp/upload/image/20160509/1462783195912085406.jpg\" title=\"1462783195912085406.jpg\" alt=\"657ACA4F9353BB75D9892C26CCD23735.jpg\"/></span></p>', null, '2016-05-09 16:40:00');
 INSERT INTO `answer` VALUES ('94', '我真的不知道该怎么改了，改什么啊？！', '<p style=\"text-align: center;\"><span style=\"color: rgb(79, 129, 189);\">我只想说改个僚子啊</span></p><p style=\"text-align: center;\"><span style=\"color: rgb(79, 129, 189);\"><img src=\"ueditor/jsp/upload/image/20160509/1462783195912085406.jpg\" title=\"1462783195912085406.jpg\" alt=\"657ACA4F9353BB75D9892C26CCD23735.jpg\"/></span></p><p><span style=\"color: rgb(79, 129, 189);\">hehe</span></p>', null, '2016-05-11 15:39:12');
-INSERT INTO `answer` VALUES ('95', '还是等到风景哈地方还是咖啡？？？？？？？？？', '<p style=\"text-align: center;\">黑手党教父哈是发动机卡号发卡号发<br/></p><img src=\"/file/test.jpg\" />', null, '2016-05-11 15:55:45');
+INSERT INTO `answer` VALUES ('95', '还是等到风景哈地方还是咖啡？？？？？？？？？', '<p style=\"text-align: center;\">黑手党教父哈是发动机卡号发卡号发<br/></p><p style=\"text-align: center;\"><img src=\"/file/test.jpg\"/></p>', null, '2016-05-13 09:49:17');
 INSERT INTO `answer` VALUES ('98', '还是进口的风口浪尖ask发货', '<p style=\"text-align: center;\"><img src=\"/ueditor/jsp/upload/image/20160511/1462977710748053329.jpg\" style=\"\" title=\"1462977710748053329.jpg\"/></p><p style=\"text-align: center;\"><img src=\"/ueditor/jsp/upload/image/20160511/1462977710766028365.jpg\" title=\"1462977710766028365.jpg\"/></p><p><br/></p>', null, '2016-05-11 22:47:22');
 INSERT INTO `answer` VALUES ('99', '你是真的不知道啊', '<h1 label=\"标题居中\" style=\"font-size: 32px; font-weight: bold; border-bottom-color: rgb(204, 204, 204); border-bottom-width: 2px; border-bottom-style: solid; padding: 0px 4px 0px 0px; text-align: center; margin: 0px 0px 20px;\">这是标题</h1><p><br/></p><p style=\"text-align: center;\"><img src=\"/ueditor/jsp/upload/image/20160511/1462979086275069978.png\" style=\"\" title=\"1462979086275069978.png\"/></p><p style=\"text-align: center;\"><img src=\"/ueditor/jsp/upload/image/20160511/1462979104922019839.jpg\" style=\"\" title=\"1462979104922019839.jpg\"/></p><p><br/></p>', null, '2016-05-12 13:45:34');
 INSERT INTO `answer` VALUES ('100', '像单纯的小猫', '<p>哈哈</p>', null, '2016-05-11 23:09:07');
@@ -155,6 +155,26 @@ INSERT INTO `department` VALUES ('15', '应用技术学院');
 INSERT INTO `department` VALUES ('17', '软件专业');
 
 -- ----------------------------
+-- Table structure for feedback
+-- ----------------------------
+DROP TABLE IF EXISTS `feedback`;
+CREATE TABLE `feedback` (
+  `feed_id` int(11) NOT NULL AUTO_INCREMENT,
+  `feed_ip` varchar(255) DEFAULT NULL,
+  `feed_time` datetime DEFAULT NULL,
+  `feed_is_useful` int(1) DEFAULT NULL,
+  `feed_ques_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`feed_id`),
+  KEY `feed_ques_id` (`feed_ques_id`),
+  CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`feed_ques_id`) REFERENCES `question` (`ques_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of feedback
+-- ----------------------------
+INSERT INTO `feedback` VALUES ('15', '0:0:0:0:0:0:0:1', '2016-05-13 16:36:45', '1', '2');
+
+-- ----------------------------
 -- Table structure for question
 -- ----------------------------
 DROP TABLE IF EXISTS `question`;
@@ -164,6 +184,8 @@ CREATE TABLE `question` (
   `search_num` int(11) NOT NULL DEFAULT '0',
   `ques_answ_id` int(11) DEFAULT NULL,
   `ques_create_time` datetime DEFAULT NULL,
+  `ques_isuse_num` int(11) DEFAULT '0',
+  `ques_nouse_num` int(11) DEFAULT '0',
   `ques_user_id` int(11) DEFAULT NULL,
   `ques_cate_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`ques_id`),
@@ -173,42 +195,41 @@ CREATE TABLE `question` (
   CONSTRAINT `question_ibfk_2` FOREIGN KEY (`ques_user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `question_ibfk_3` FOREIGN KEY (`ques_cate_id`) REFERENCES `category` (`cate_id`),
   CONSTRAINT `question_ibfk_4` FOREIGN KEY (`ques_answ_id`) REFERENCES `answer` (`answ_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of question
 -- ----------------------------
-INSERT INTO `question` VALUES ('1', '什么是学分制？', '78', '1', '2016-04-24 10:42:46', '2', '1');
-INSERT INTO `question` VALUES ('2', '什么是学分？它是怎么计算的？', '30', '2', '2016-04-24 10:48:32', '2', '13');
-INSERT INTO `question` VALUES ('3', '转专业有些什么条件？', '22', '3', '2016-04-24 10:48:59', '2', '11');
-INSERT INTO `question` VALUES ('4', '申请辅修资格有什么条件？', '31', '4', '2016-04-24 10:49:23', '2', '1');
-INSERT INTO `question` VALUES ('5', '这是什么？', '23', '89', '2016-04-25 15:39:17', '2', '7');
-INSERT INTO `question` VALUES ('6', '啦啦啦嘻嘻', '10', '92', '2016-05-01 20:10:08', '2', '7');
-INSERT INTO `question` VALUES ('8', '如何申请双学位？', '84', '5', '2016-04-24 10:51:49', '2', '1');
-INSERT INTO `question` VALUES ('9', '我可以提前毕业或延长学习年限吗？', '64', '6', '2016-04-24 10:52:06', '2', '2');
-INSERT INTO `question` VALUES ('10', '写的好卡家的撒udfk', '6', '88', '2016-04-25 15:38:28', '2', '2');
-INSERT INTO `question` VALUES ('11', '选课的时间安排是怎么样的？', '7', '7', '2016-04-24 10:52:54', '2', '13');
-INSERT INTO `question` VALUES ('12', '为什么有的课程安排了上课时间和地点，有的课程没有安排？', '7', '8', '2016-04-24 10:53:13', '2', '1');
-INSERT INTO `question` VALUES ('18', '为什么为什么为什么为什么？', '5', '87', '2016-04-25 11:59:19', '2', '1');
-INSERT INTO `question` VALUES ('19', '时代河坊街就是快递放假啊考试辅导和卡上的疯狂？', '11', '86', '2016-04-25 13:01:13', '2', '12');
-INSERT INTO `question` VALUES ('20', '时代河坊街萨芬卡死jfk的沙发', '5', '80', '2016-04-25 13:36:20', '2', '1');
-INSERT INTO `question` VALUES ('21', '沙发上啊就是看到jfk啦解放', '12', '81', '2016-04-25 13:36:30', '2', '11');
-INSERT INTO `question` VALUES ('23', '是冬季护肤开始疯狂的撒酒疯', '12', '85', '2016-04-25 14:11:21', '2', '1');
-INSERT INTO `question` VALUES ('25', '设计的疯狂撒酒疯', '19', '90', '2016-05-01 19:49:01', '4', '10');
-INSERT INTO `question` VALUES ('26', '他们说快些一首情歌雅俗共赏', '23', '91', '2016-05-01 20:08:19', '3', '9');
-INSERT INTO `question` VALUES ('27', '中枪中奖感觉都一样', '0', null, '2016-05-01 20:15:45', '3', '9');
-INSERT INTO `question` VALUES ('28', '青年晚报', '0', null, '2016-05-01 21:55:04', null, null);
-INSERT INTO `question` VALUES ('39', '到底哪些是学分制', '7', '1', '2016-05-12 15:20:31', '2', '1');
-INSERT INTO `question` VALUES ('44', '我真的不知道该怎么改了，改什么啊？！', '6', '94', '2016-05-11 15:39:12', '2', '7');
-INSERT INTO `question` VALUES ('46', '像单纯的小猫', '1', '100', '2016-05-11 23:09:07', '2', null);
-INSERT INTO `question` VALUES ('47', '还是等到风景哈地方还是咖啡？？？？？？？？？', '1', '95', '2016-05-11 15:55:45', '2', null);
-INSERT INTO `question` VALUES ('48', '还是进口的风口浪尖ask发货', '0', '98', '2016-05-11 22:47:22', '2', '7');
-INSERT INTO `question` VALUES ('49', '你是真的不知道啊', '0', '99', '2016-05-12 13:45:34', '2', null);
-INSERT INTO `question` VALUES ('50', '你想知道想知道不？？？', '5', '101', '2016-05-11 23:50:08', '2', null);
-INSERT INTO `question` VALUES ('51', '嘿嘿嘿作为一个标题啊！！！', '1', '102', '2016-05-11 23:55:32', '2', null);
-INSERT INTO `question` VALUES ('53', '学分制的概念是什么？？？', '8', '1', '2016-05-12 15:20:23', '2', '1');
-INSERT INTO `question` VALUES ('54', '学分制de概念', '2', '1', '2016-05-12 15:21:44', '2', '1');
-INSERT INTO `question` VALUES ('55', '乐乐乐', '1', '104', '2016-05-12 16:28:42', '2', null);
+INSERT INTO `question` VALUES ('1', '什么是学分制？', '151', '1', '2016-04-24 10:42:46', '0', '0', '2', '1');
+INSERT INTO `question` VALUES ('2', '什么是学分？它是怎么计算的？', '101', '2', '2016-04-24 10:48:32', '1', '0', '2', '13');
+INSERT INTO `question` VALUES ('3', '转专业有些什么条件？', '37', '3', '2016-04-24 10:48:59', '0', '0', '2', '11');
+INSERT INTO `question` VALUES ('4', '申请辅修资格有什么条件？', '93', '4', '2016-04-24 10:49:23', '0', '0', '2', '1');
+INSERT INTO `question` VALUES ('5', '这是什么？', '23', '89', '2016-04-25 15:39:17', '0', '0', '2', '7');
+INSERT INTO `question` VALUES ('6', '啦啦啦嘻嘻', '10', '92', '2016-05-01 20:10:08', '0', '0', '2', '7');
+INSERT INTO `question` VALUES ('8', '如何申请双学位？', '152', '5', '2016-04-24 10:51:49', '0', '0', '2', '1');
+INSERT INTO `question` VALUES ('9', '我可以提前毕业或延长学习年限吗？', '128', '6', '2016-04-24 10:52:06', '0', '0', '2', '2');
+INSERT INTO `question` VALUES ('10', '写的好卡家的撒udfk', '6', '88', '2016-04-25 15:38:28', '0', '0', '2', '2');
+INSERT INTO `question` VALUES ('11', '选课的时间安排是怎么样的？', '7', '7', '2016-04-24 10:52:54', '0', '0', '2', '13');
+INSERT INTO `question` VALUES ('12', '为什么有的课程安排了上课时间和地点，有的课程没有安排？', '7', '8', '2016-04-24 10:53:13', '0', '0', '2', '1');
+INSERT INTO `question` VALUES ('18', '为什么为什么为什么为什么？', '5', '87', '2016-04-25 11:59:19', '0', '0', '2', '1');
+INSERT INTO `question` VALUES ('19', '时代河坊街就是快递放假啊考试辅导和卡上的疯狂？', '11', '86', '2016-04-25 13:01:13', '0', '0', '2', '12');
+INSERT INTO `question` VALUES ('20', '时代河坊街萨芬卡死jfk的沙发', '5', '80', '2016-04-25 13:36:20', '0', '0', '2', '1');
+INSERT INTO `question` VALUES ('21', '沙发上啊就是看到jfk啦解放', '12', '81', '2016-04-25 13:36:30', '0', '0', '2', '11');
+INSERT INTO `question` VALUES ('23', '是冬季护肤开始疯狂的撒酒疯', '12', '85', '2016-04-25 14:11:21', '0', '0', '2', '1');
+INSERT INTO `question` VALUES ('25', '设计的疯狂撒酒疯', '19', '90', '2016-05-01 19:49:01', '0', '0', '4', '10');
+INSERT INTO `question` VALUES ('26', '他们说快些一首情歌雅俗共赏', '30', '91', '2016-05-01 20:08:19', '0', '0', '3', '9');
+INSERT INTO `question` VALUES ('27', '中枪中奖感觉都一样', '0', null, '2016-05-01 20:15:45', '0', '0', '3', '9');
+INSERT INTO `question` VALUES ('39', '到底哪些是学分制', '33', '1', '2016-05-12 15:20:31', '0', '0', '2', '1');
+INSERT INTO `question` VALUES ('44', '我真的不知道该怎么改了，改什么啊？！', '8', '94', '2016-05-11 15:39:12', '0', '0', '2', '7');
+INSERT INTO `question` VALUES ('46', '像单纯的小猫', '1', '100', '2016-05-11 23:09:07', '0', '0', '2', null);
+INSERT INTO `question` VALUES ('47', '还是等到风景哈地方还是咖啡？？？？？？？？？', '1', '95', '2016-05-13 09:49:17', '0', '0', '2', null);
+INSERT INTO `question` VALUES ('48', '还是进口的风口浪尖ask发货', '0', '98', '2016-05-11 22:47:22', '0', '0', '2', '7');
+INSERT INTO `question` VALUES ('49', '你是真的不知道啊', '2', '99', '2016-05-12 13:45:34', '0', '0', '2', null);
+INSERT INTO `question` VALUES ('50', '你想知道想知道不？？？', '14', '101', '2016-05-11 23:50:08', '0', '0', '2', null);
+INSERT INTO `question` VALUES ('51', '嘿嘿嘿作为一个标题啊！！！', '1', '102', '2016-05-11 23:55:32', '0', '0', '2', null);
+INSERT INTO `question` VALUES ('53', '学分制的概念是什么？？？', '34', '1', '2016-05-12 15:20:23', '0', '0', '2', '1');
+INSERT INTO `question` VALUES ('54', '学分制de概念', '27', '1', '2016-05-12 15:21:44', '0', '0', '2', '1');
+INSERT INTO `question` VALUES ('55', '乐乐乐', '1', '88', '2016-05-13 09:50:29', '0', '0', '2', null);
 
 -- ----------------------------
 -- Table structure for user

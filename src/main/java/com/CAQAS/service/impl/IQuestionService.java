@@ -10,8 +10,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.CAQAS.dao.FeedbackMapper;
 import com.CAQAS.dao.QuestionMapper;
 import com.CAQAS.model.QuestionsResultModel;
+import com.CAQAS.pojo.Feedback;
 import com.CAQAS.pojo.Question;
 import com.CAQAS.service.QuestionService;
 import com.CAQAS.util.SimilarityUtil;
@@ -22,6 +24,9 @@ public class IQuestionService implements QuestionService {
 
 	@Resource
 	private QuestionMapper questionMapper;
+	
+	@Resource
+	private FeedbackMapper feedbackMapper;
 	
 	public Map<String, Object> selectQuestionsByUserId(Integer quesUserId, Integer page, 
 			Integer pageNum, Integer solved, Integer role) {
@@ -117,6 +122,28 @@ public class IQuestionService implements QuestionService {
 
 	public int insertSelective(Question question) {
 		return questionMapper.insertSelective(question);
+	}
+
+	public int updateIsuseNum(Integer quesId, String feedIp) {
+		int result = questionMapper.updateIsuseNum(quesId);
+		Feedback feedback = new Feedback();
+		feedback.setFeedIp(feedIp);
+		feedback.setFeedIsUseful(1);
+		feedback.setFeedTime(new Date());
+		feedback.setFeedQuesId(quesId);
+		feedbackMapper.insertFeedbackInfo(feedback);
+		return result;
+	}
+
+	public int updateNouseNum(Integer quesId, String feedIp) {
+		int result = questionMapper.updateNouseNum(quesId);
+		Feedback feedback = new Feedback();
+		feedback.setFeedIp(feedIp);
+		feedback.setFeedIsUseful(1);
+		feedback.setFeedTime(new Date());
+		feedback.setFeedQuesId(quesId);
+		feedbackMapper.insertFeedbackInfo(feedback);
+		return result;
 	}
 
 }

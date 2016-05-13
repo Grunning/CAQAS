@@ -66,10 +66,6 @@ public class QuestionController {
 		String searchTitle = request.getParameter("searchTitle");
 		Integer page = Integer.parseInt(request.getParameter("page"));
 		Integer pageNum = Integer.parseInt(request.getParameter("pageNum"));
-		System.out.println("主机名：" + request.getRemoteHost());
-		System.out.println("User:" + request.getRemoteUser());
-		System.out.println("ip地址：" + request.getRemoteAddr());
-		System.out.println("端口号：" + request.getRemotePort());
 		return questionService.selectVagueQuestionsSearch(searchTitle, (page - 1)*pageNum, pageNum);
 	}
 	
@@ -183,6 +179,32 @@ public class QuestionController {
 		question.setQuesCreateTime(new Date());
 		question.setQuesAnswId(quesAnswId);
 		return questionService.insertSelective(question);
+	}
+	
+	/**
+	 * 更新有用字段.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/updateIsuseNum")
+	public Integer updateIsuseNum(HttpServletRequest request) {
+		Integer quesId = Integer.parseInt(request.getParameter("quesId"));
+		String feedIp = request.getRemoteAddr();
+		return questionService.updateIsuseNum(quesId, feedIp);
+	}
+	
+	/**
+	 * 更新无用字段.
+	 * @param request request对象
+	 * @return 结果
+	 */
+	@ResponseBody
+	@RequestMapping("/updateNouseNum")
+	public Integer updateNouseNum(HttpServletRequest request) {
+		Integer quesId = Integer.parseInt(request.getParameter("quesId"));
+		String feedIp = request.getRemoteAddr();
+		return questionService.updateNouseNum(quesId, feedIp);
 	}
 
 }

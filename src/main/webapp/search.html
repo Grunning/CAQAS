@@ -33,7 +33,7 @@
     				<div class="input-group">
       					<input type="text" id="searchTitle" class="form-control" style="width:400px;" placeholder="输入要搜索的内容">
       					<span class="input-group-btn">
-        					<button class="btn btn-default" type="button" onclick="javascript:jumpToSearchPage();">Go</button>
+        					<button class="btn btn-default" type="button" onclick="javascript:btnSearch();">Go</button>
       					</span>
     				</div><!-- /input-group -->
   			</div>
@@ -48,49 +48,10 @@
 	
 	<div class="jumbotron">
 		<div class="container">
-		<div class="row" style="margin-top:20px;">
-			<div class="col-lg-9">
-			<div id="usualQuestions"></div>
-				<!-- <ol class="breadcrumb">
-					<li>一个月内最常问前五个问题：</li>
-				</ol>
-				<div class="panel panel-default panel-body">
-					<a data-toggle="collapse" data-parent="#accordion" 
-          href="#collapseTwo">1、Basic panel
-						example技术的jfk大家看法了道具收费的的jfk来说接口规范的数据库管理的方式看风景开好的风口浪尖的少了几分独立思考感觉</a>
-					<div id="collapseTwo" class="panel-collapse collapse in">
-						<div class="panel-body">
-							<hr>
-							       学校鼓励学有余力的同学拓宽专业面，适度文、理、工渗透，修读辅修专业。凡第三学期或第四学期以前所修课程平均学分绩点大于2.0的同学均可修读。辅修专业由开设学院负责制订指导性教学计划，并公布开设课程及学期，供全校其它专业同学选择。修读辅修专业由本人提出申请，经原所在学院和接受学院同意后，接受学院到教务处教务科备案，并指导同学在网上选课。辅修专业开设学院负责修读同学的教学管理及成绩审核工作，完成辅修专业教学计划的同学，经考核合格，可发给辅修专业毕业证书。
-						</div>
-					</div>
-				</div>
-				<div class="panel panel-default panel-body">
-					<a data-toggle="collapse" data-parent="#accordion" 
-          href="#collapseOne">2、Basic panel example</a>
-					<div id="collapseOne" class="panel-collapse collapse">
-				      <div class="panel-body">
-						<hr>
-				        Nihil anim keffiyeh helvetica, craft beer labore wes anderson 
-				        cred nesciunt sapiente ea proident. Ad vegan excepteur butcher 
-				        vice lomo.
-				      </div>
-    				</div>
-				</div> -->
-				<!-- <div id="btnGetMore" align="center">
-					<button type="button" class="btn btn-primary" onclick="javascript:;">GET MORE</button>
-				</div> -->
+			<div id="searchAnswerContent" style="margin-top:20px;"></div>
+			<div id="btnGetMore" align="center">
+				<!-- <button type="button" class="btn btn-primary" onclick="javascript:;">GET MORE</button> -->
 			</div>
-			<div class="col-lg-3" style="margin-top:36px;">
-				<div id="tagscloud" class="panel panel-default panel-body">
-					<ol class="breadcrumb">
-						<li>问题分类云标签</li>
-					</ol>
-					<div id="aTag">
-					</div>
-				</div>
-			</div>
-		</div>
 		</div>
 	</div>
 	<hr>
@@ -110,12 +71,17 @@
 			}
 			$('#searchTitle').bind('keypress',function(event){
 	            if(event.keyCode == "13") {
-	            	jumpToSearchPage();
+	            	btnSearch();
 	            }
 	        });
-			getUrl();
-			selectUsualQuestions();
-			aTagCloud();
+			var url = window.location.href;
+			if (url.indexOf("?") != -1) {
+				var arr = [];
+				arr = url.split("?");
+				var question = arr[1].split("=")[1];
+				document.getElementById("searchTitle").value = decodeURI(question);
+				btnSearch();
+			}
 		});
 	</script>
 </body>

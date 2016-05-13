@@ -5,6 +5,8 @@ public class QuestionsResultModel {
 	private String quesTitle;//问题标题
 	private Integer searchNum;//查询次数
 	private String quesCreateTime;//问题创建时间
+	private Integer quesIsuseNum;
+	private Integer quesNouseNum;
 	private Integer answId;
 	private String answTitle;
 	private String answContent;//答复内容
@@ -41,6 +43,18 @@ public class QuestionsResultModel {
 	}
 	public void setQuesCreateTime(String quesCreateTime) {
 		this.quesCreateTime = quesCreateTime;
+	}
+	public Integer getQuesIsuseNum() {
+		return quesIsuseNum;
+	}
+	public void setQuesIsuseNum(Integer quesIsuseNum) {
+		this.quesIsuseNum = quesIsuseNum;
+	}
+	public Integer getQuesNouseNum() {
+		return quesNouseNum;
+	}
+	public void setQuesNouseNum(Integer quesNouseNum) {
+		this.quesNouseNum = quesNouseNum;
 	}
 	public String getAnswTitle() {
 		return answTitle;

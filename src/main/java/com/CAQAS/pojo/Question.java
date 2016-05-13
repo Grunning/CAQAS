@@ -13,6 +13,10 @@ public class Question {
 
     private Date quesCreateTime;
     
+    private Integer quesIsuseNum;
+    
+    private Integer quesNouseNum;
+    
     private Integer quesUserId;
     
     private Integer quesCateId;
@@ -55,6 +59,22 @@ public class Question {
 
 	public void setQuesCreateTime(Date quesCreateTime) {
 		this.quesCreateTime = quesCreateTime;
+	}
+
+	public Integer getQuesIsuseNum() {
+		return quesIsuseNum;
+	}
+
+	public void setQuesIsuseNum(Integer quesIsuseNum) {
+		this.quesIsuseNum = quesIsuseNum;
+	}
+
+	public Integer getQuesNouseNum() {
+		return quesNouseNum;
+	}
+
+	public void setQuesNouseNum(Integer quesNouseNum) {
+		this.quesNouseNum = quesNouseNum;
 	}
 
 	public Integer getQuesUserId() {

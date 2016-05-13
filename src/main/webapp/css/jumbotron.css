@@ -22,3 +22,11 @@ span.word {
 span.more {
 	color:#0000FF;
 }
+
+.isUseful {
+	float:right;
+}
+
+.btn-isUseful {
+	margin-right:5px;
+}

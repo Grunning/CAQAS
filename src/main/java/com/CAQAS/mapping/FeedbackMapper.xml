@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.CAQAS.dao.FeedbackMapper" >
+  <resultMap id="BaseResultMap" type="com.CAQAS.pojo.Feedback" >
+    <id column="feed_id" property="feedId" jdbcType="INTEGER" />
+    <result column="feed_ip" property="feedIp" jdbcType="VARCHAR" />
+    <result column="feed_time" property="feedTime" jdbcType="TIMESTAMP" />
+    <result column="feed_is_useful" property="feedIsUseful" jdbcType="INTEGER"/>
+    <result column="feed_ques_id" property="feedQuesId" jdbcType="INTEGER"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    feed_id, feed_ip, feed_time, feed_is_useful, feed_ques_id
+  </sql>
+  <!-- 查询当前游客操作过的问题 -->
+  <select id="selectFeedbackByIpAndQuesId" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from feedback
+  	where feed_ip = #{feedIp,jdbcType=VARCHAR}
+  	and feed_ques_id = #{feedQuesId,jdbcType=INTEGER}
+  </select>
+  <!-- 添加反馈 -->
+  <insert id="insertFeedbackInfo" parameterType="com.CAQAS.pojo.Feedback">
+  	insert into feedback
+  		<trim prefix="(" suffix=")" suffixOverrides=",">
+  			<if test="feedId != null">
+  				feed_id,
+  			</if>
+  			<if test="feedIp != null">
+  				feed_ip,
+  			</if>
+  			<if test="feedTime != null">
+  				feed_time,
+  			</if>
+  			<if test="feedIsUseful != null">
+  				feed_is_useful,
+  			</if>
+  			<if test="feedQuesId != null">
+  				feed_ques_id,
+  			</if>
+  		</trim>
+  		<trim prefix="values (" suffix=")" suffixOverrides="," >
+  			<if test="feedId != null">
+  				#{feedId,jdbcType=INTEGER},
+  			</if>
+  			<if test="feedIp != null">
+  				#{feedIp,jdbcType=VARCHAR},
+  			</if>
+  			<if test="feedTime != null">
+  				#{feedTime,jdbcType=TIMESTAMP},
+  			</if>
+  			<if test="feedIsUseful != null">
+  				#{feedIsUseful,jdbcType=INTEGER},
+  			</if>
+  			<if test="feedQuesId != null">
+  				#{feedQuesId,jdbcType=INTEGER},
+  			</if>
+  		</trim>
+  </insert>
+</mapper>
